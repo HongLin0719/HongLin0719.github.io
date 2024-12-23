@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHOPLINE 全球智慧開店平台｜完整開店功能讓你的生意不斷成長</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #E59453;
+      color: #fff;
+      height: 40px;
+      padding-left: calc((100vw - 1088px) / 2);
+      padding-right: calc((100vw - 1088px) / 2);
+      line-height: 40px;
+      z-index: 999;
+      text-align: center;
+    }
+
+    .banner-text {
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-block;
+      vertical-align: middle;
+      padding-bottom: 2px;
+    }
+
+    .close-btn {
+      vertical-align: middle;
+      position: absolute;
+      right: 2em;
+    }
+
+    header {
+      position: fixed;
+      top: 40px;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 0 5px #00000020;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+      height: 80px;
+      padding-left: calc((100vw - 1088px) / 2);
+      padding-right: calc((100vw - 1088px) / 2);
+    }
+
+    header .panel a,
+    header .panel button {
+      text-decoration: none;
+      color: #052855;
+      cursor: pointer;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+    }
+
+    header .panel a::after,
+    header .panel button::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: #007bff;
+      transform: translateX(-50%);
+      transition: width 0.3s ease-in-out;
+    }
+
+    header .panel a:hover::after,
+    header .panel button:hover::after {
+      width: 100%;
+    }
+
+    .logo {
+      height: 46px;
+      width: auto;
+      pointer-events: none;
+    }
+
+    .panel {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      padding: 0 48px;
+
+    }
+
+    .panel li {
+      margin: 0 10px;
+    }
+
+    header>a.free-trial {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      position: static;
+    }
+
+    header>a.free-trial:hover {
+      background-color: #0056b3;
+    }
+
+    header>a.free-trial::after {
+      content: none;
+    }
+
+    button {
+      all: unset;
+      cursor: pointer;
+    }
+
+    .sec-top {
+      margin-top: 80px;
+      padding-top: 64px;
+    }
+
+    .sec-mid {
+      display: flex;
+      justify-content: center;
+      padding-left: calc((100vw - 1088px) / 2);
+      padding-right: calc((100vw - 1088px) / 2);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .sec-h1 {
+      font-size: 250%;
+      color: #052855;
+      margin-bottom: 24px;
+      line-height: calc(5px + 2ex + 5px);
+    }
+
+    .sec-p {
+      color: #5D6A7A;
+      margin-bottom: 24px;
+      line-height: calc(5px + 2ex + 5px);
+    }
+
+    .trial {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      position: static;
+      height: 48px;
+      width: 320px;
+    }
+
+    .trial:hover {
+      background-color: #0056b3;
+    }
+
+    .memo {
+      font-size: 81.25%;
+      color: #5D6A7A;
+      margin-top: 7px;
+      display: inline-block;
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 50px;
+      padding: 0 20px;
+    }
+
+    .left {
+      max-width: 60%;
+    }
+
+    .body-img {
+
+      max-width: 35%;
+      height: auto;
+      object-fit: contain;
+
+    }
+
+    .bgcolor {
+      background: linear-gradient(180deg, #EBF1F8 78.12%, #DBE7F4 91.15%);
+    }
+
+    .internet-color {
+      color: #3D8DD1;
+    }
+
+    .div-height {
+      height: 80px;
+      background: linear-gradient(180deg, #F6F9FC 0%, #ECF2F9 47.92%);
+    }
+
+    .div-help {
+      height: 269px;
+      background-color: #F7F8F9;
+      text-align: center;
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+
+    .div-help h2 {
+      font-size: 200%;
+      font-weight: bold;
+      margin-bottom: 24px;
+      color: #052855;
+    }
+
+    .div-help p {
+      color: #052855;
+    }
+
+    .sec-padding {
+      padding-top: 20px;
+      padding-bottom: 64px;
+    }
+
+    .sec-padding h3 {
+      font-size: 175%;
+      font-weight: bold;
+      margin-bottom: 24px;
+      line-height: calc(5px+2ex+5px);
+      color: #052855;
+    }
+
+    .sec-padding p {
+      font-size: 100%;
+      margin-bottom: 24px;
+      line-height: calc(5px+2ex+5px);
+      color: #052855;
+      text-align: justify;
+    }
+
+    .sec-padding ul {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      width: 530px;
+      height: auto;
+      row-gap: 20px;
+      color: #052855;
+      list-style: none;
+    }
+
+    .sec-padding ul li {
+      position: relative;
+      padding-left: 20px;
+      width: calc(50% - 7px);
+
+    }
+
+    .sec-padding ul li::before {
+      content: "•";
+      color: #007bff;
+      font-size: 1.5em;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+
+
+    .arrow {
+      color: #0061FF;
+
+    }
+
+    .a-margin {
+      margin-top: 40px;
+      display: inline-block;
+      color: #0061FF;
+      text-underline-offset: 4px;
+      position: relative;
+    }
+
+    .a-margin::after {
+      content: "➔";
+      font-size: 18px;
+      color: #007bff;
+      margin-left: 8px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      text-decoration: none;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .a-margin:hover::after {
+      transform: translate(7px, -50%);
+    }
+
+    .reverse .content {
+      flex-direction: row-reverse;
+    }
+
+    .div-more {
+      text-align: center;
+      flex-wrap: wrap;
+      background-color: #F7F8F9;
+      padding-top: 64px;
+      padding-bottom: 64px;
+      padding-left: calc((100vw - 1088px) / 2);
+      padding-right: calc((100vw - 1088px) / 2);
+      line-height: calc(5px + 2ex + 5px);
+      display: flex;
+    }
+
+    .div-more h3 {
+      width: 100%;
+      margin-bottom: 14px;
+      font-size: 175%;
+      text-align: center;
+      font-weight: bold;
+      color: #052855;
+    }
+
+    .div-more h5 {
+      line-height: 1.5;
+      font-size: 125%;
+      margin-bottom: 16px;
+      font-weight: bold;
+      text-align: center;
+      color: #052855;
+    }
+
+    .div-more p {
+      color: #052855;
+    }
+
+    .div-more div {
+      width: calc((100% - 32px * 2) / 3.001);
+      margin: 58px 0 0 20px;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .div-more img {
+      height: 120px;
+      width: 120px;
+    }
+
+    .div-branch {
+      text-align: center;
+      flex-wrap: wrap;
+      padding-top: 64px;
+      padding-bottom: 64px;
+      padding-left: calc((100vw - 1088px) / 2);
+      padding-right: calc((100vw - 1088px) / 2);
+      line-height: calc(5px + 2ex + 5px);
+      display: flex;
+    }
+
+    .div-branch h3 {
+      width: 100%;
+      margin-bottom: 14px;
+      font-size: 175%;
+      text-align: center;
+      font-weight: bold;
+      color: #052855;
+    }
+
+    .div-branch img {
+      width: 100%;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .div-branch p {
+      text-align: center;
+      width: 100%;
+      color: #052855;
+    }
+
+    .div-branch span {
+      width: 133%;
+      font-weight: bold;
+    }
+
+    .div-count {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 269px;
+      background-color: #EBF1F8;
+      text-align: center;
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+
+    .div-count h2 {
+      font-size: 250%;
+      margin-bottom: 48px;
+      color: #052855;
+    }
+
+    .trial2 {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      position: static;
+      height: 48px;
+      width: 160px;
+    }
+
+    .trial2:hover {
+      background-color: #0056b3;
+    }
+
+    .footer {
+      padding-top: 32px;
+      padding-bottom: 32px;
+      background-color: #00142D;
+      color: #fff;
+      padding-left: calc((100vw - 1100px) / 2);
+      padding-right: calc((100vw - 1100px) / 2);
+
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      max-width: 1088px;
+
+      border-bottom: 1px solid #ffffff30;
+
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 120px;
+      text-align: left;
+    }
+
+    .footer-column h4 {
+      color: #ffffff;
+      margin-bottom: 6px;
+      padding-bottom: 8px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-column ul li a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      opacity: 0.5;
+    }
+
+    .footer-column ul li a:hover {
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    .footer-bottom {
+      text-align: right;
+      margin-top: 40px;
+      padding-top: 20px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .security-link {
+      color: #172B4D;
+      background-color: #E3B54C;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+      width: 225px;
+      text-align: center;
+      height: 38px;
+    }
+
+    .footer-div1 {
+      text-align: left;
+      margin-bottom: 24px;
+      font-weight: 500;
+      border-bottom: 1px solid #ffffff50;
+      padding-bottom: 24px;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-div1 a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+
+    .a-padding {
+      padding-left: 20px;
+    }
+
+    .service-time {
+      padding-top: 20px;
+      line-height: calc(5px + 2ex + 5px);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer-a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      opacity: 0.5;
+
+    }
+
+    .footer-a:hover {
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    .footer-a1 {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      opacity: 0.5;
+      margin-left: 16px;
+      padding-left: 16px;
+      border-left: 1px solid #ffffff50;
+    }
+
+    .footer-a1:hover {
+      color: #ffffff;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="banner">
+      <span class="banner-text">🎊 助攻節慶商機！新戶開店補貼多重送 👉</span>
+      <button class="close-btn">✖</button>
+    </div>
+    <a href="" class="logo-link">
+      <img src="logo.jpg" alt="LOGO" class="logo">
+    </a>
+
+    <ul class="panel">
+      <li class="licolor"><a href="">產品核心</a></li>
+      <li class="licolor"><button>新手上路</button></li>
+      <li class="licolor"><button>開店服務</button></li>
+      <li class="licolor"><button>行銷推廣</button></li>
+      <li class="licolor"><button>營運管理</button></li>
+      <li class="licolor"><button>方案費用</button></li>
+      <li class="licolor"><button>更多資源</button></li>
+    </ul>
+
+    <a href="" class="free-trial">免費試用</a>
+  </header>
+  <section class="sec-top sec-mid bgcolor">
+    <div class="content">
+      <div class="left">
+        <h1 class="sec-h1">想在哪開店創業?<br>不管是<span class="internet-color">網路開店</span><br>SHOPLINE 一站輕鬆開賣</h1>
+        <p class="sec-p">從個人賣家到國際品牌，都能以 SHOPLINE 實現全通路零售，<br>快速拓展市場到世界各地，輕鬆開始你的『 店 』商生意！</p>
+        <a href="" class="trial">免費試用14天</a>
+        <span class="memo">＊無需綁定信用卡提供付款資訊</span>
+
+      </div>
+      <img src="body.jpg" alt="" class="body-img">
+    </div>
+  </section>
+  <div class="div-height"></div>
+  <div class="div-help">
+    <h2>單一平台就能助你<br>在全通路輕鬆開店創業</h2>
+    <p>從網路商店架站到實體門市管理，只需要一個平台，就能輕鬆實現開店創業，並能同步管理所有銷售管道，SHOPLINE 助你賣得更多、賣得更好！</p>
+  </div>
+  <section class="sec-padding sec-top sec-mid">
+    <div class="content">
+      <div class="left">
+        <h3>免寫程式、多款版型<br>輕鬆打造全能電商網站</h3>
+        <p>不會寫程式也能輕鬆架設品牌電商官網！任何產業都能找到合適的專業<br>設計版型，以滑鼠拖曳就能完成網頁編輯，讓架設網站就像堆積木一樣<br>簡單。</p>
+        <ul>
+          <li>豐富版型主題與字型搭配</li>
+          <li>SEO 搜尋引擎優化</li>
+          <li>RWD 響應式網頁設計</li>
+          <li>一頁商店</li>
+          <li>獨有網址 ＆ SSL 安全憑證</li>
+          <li>開放 HTML／CSS 編輯</li>
+        </ul>
+        <a href="" class="a-margin">查看開店密技</a>
+
+      </div>
+      <img src="sec2.jpg" alt="" class="body-img">
+    </div>
+  </section>
+  <section class="sec-padding sec-top sec-mid reverse">
+    <div class="content">
+      <div class="left">
+        <h3>支持海內外電商<br>金流、物流一次搞定</h3>
+        <p>支持在地及國際金流、物流串接服務，提供海內外顧客最便利的付款及<br>送貨服務，加速消費者完成下單交易，大幅降低購物車放棄率！<br></p>
+        <ul>
+          <li>線上／線下信用卡刷卡</li>
+          <li>多溫層宅配並指定運費</li>
+          <li>第三方金流／行動支付整合</li>
+          <li>超商／宅配貨到付款</li>
+          <li>超商代碼／條碼繳費</li>
+          <li>發票開立與串接</li>
+        </ul>
+        <a href="" class="a-margin">了解更多金物流</a>
+
+      </div>
+      <img src="sec3.jpg" alt="" class="body-img">
+    </div>
+  </section>
+  <section class="sec-padding sec-top sec-mid">
+    <div class="content">
+      <div class="left">
+        <h3>刺激下單，創造回購<br>行銷導流、促購模組任你玩</h3>
+        <p>多元優惠活動、會員集客機制、網紅分潤等多種優惠促銷，將電商行銷<br>玩法一網打盡；加上廣告追蹤助你有效優化行銷活動，刺激顧客下單、<br>吸引鐵粉回購！</p>
+        <ul>
+          <li>推薦活動與分潤</li>
+          <li>買Ｘ享Ｙ優惠</li>
+          <li>A+B 優惠活動</li>
+          <li>會員推薦獎賞</li>
+          <li>會員分級／點數／購物金</li>
+          <li>FB／Google／LINE 廣告追蹤</li>
+        </ul>
+        <a href="" class="a-margin">看更多優惠模組</a>
+
+      </div>
+      <img src="sec4.jpg" alt="" class="body-img">
+    </div>
+  </section>
+  <section class="sec-padding sec-top sec-mid reverse">
+    <div class="content">
+      <div class="left">
+        <h3>「社群+電商」輕鬆開賣<br>打造一致的社群購物體驗</h3>
+        <p>善用社群與顧客頻繁互動，讓你透過社群也能輕鬆開賣！從直播 +1 接<br>單、聊天機器人到各管道的訊息整合，我們都為你準備好了，不放過每<br>個銷售環節，打造全方位的社群購物體驗！</p>
+        <ul>
+          <li>社群直播購物系統</li>
+          <li>FB／IG／LINE 直播 +1</li>
+          <li>FB & IG 貼文 +1</li>
+          <li>FB／IG／LINE 對話式購物</li>
+          <li>自訂聊天機器人腳本</li>
+          <li>訊息整合中心</li>
+        </ul>
+        <a href="" class="a-margin">看更多社群購物功能</a>
+
+      </div>
+      <img src="sec5.jpg" alt="" class="body-img">
+    </div>
+  </section>
+  <section class="sec-padding sec-top sec-mid">
+    <div class="content">
+      <div class="left">
+        <h3>OMO 全通路無縫整併<br>輕鬆管理網店、門市以及其他通路</h3>
+        <p>不論是網店拓展門市，還是門市想發展網路生意，從商品、庫存、訂單<br>到會員等各項虛實店舖的資料都能完善整併，輕鬆實現全通路會員經營<br>到多店營運。</p>
+        <ul>
+          <li>門市 POS 系統</li>
+          <li>線上買門市取</li>
+          <li>線上線下會員／商品／庫存整合</li>
+          <li>進銷庫存／調撥／多店管理</li>
+          <li>門市快速集客工具</li>
+          <li>Smart OMO 會員導購工具</li>
+        </ul>
+        <a href="" class="a-margin">了解更多全通路整合</a>
+
+      </div>
+      <img src="sec6.jpg" alt="" class="body-img">
+    </div>
+  </section>
+  <div class="div-more">
+    <h3>更多功能與服務</h3>
+    <div>
+      <img src="div1.jpg" alt="">
+      <h5>強大庫存與訂單系統</h5>
+      <p>從商品數量、貨況到訂單付款狀態、物流貨態<br>一目瞭然，提升營運效率超有感。</p>
+    </div>
+    <div>
+      <img src="div2.jpg" alt="">
+      <h5>即時化商店業績分析</h5>
+      <p>圖表化報表助你一手掌握商店概況，讓數據助<br>攻企業成長，營運策略更有方向。</p>
+    </div>
+    <div>
+      <img src="div3.jpg" alt="">
+      <h5>多國語系、幣值切換</h5>
+      <p>想做跨境電商也ＯＫ！提供語言、幣別、稅金<br>等進階功能，友善應對海外消費需求。</p>
+    </div>
+    <div>
+      <img src="div4.jpg" alt="">
+      <h5>專業顧問線上支援</h5>
+      <p>迅速、透明的溝通管道，協助你快速解決從線<br>上到線下、從在地到海外的網店疑難。</p>
+    </div>
+    <div>
+      <img src="div5.jpg" alt="">
+      <h5>廣告行銷加值服務</h5>
+      <p>由官方認證的專業投手團隊，協助品牌投遞<br>Facebook、Google、LINE 等廣告。</p>
+    </div>
+    <div>
+      <img src="div6.jpg" alt="">
+      <h5>品牌專屬成長社群</h5>
+      <p>致力為品牌店家打造能深度交流且互助的生態<br>體系，是拓展人脈、商機的絕佳場域。</p>
+    </div>
+  </div>
+  <div class="div-branch">
+    <h3>人氣品牌一致推薦使用</h3>
+    <img src="branch.jpg" alt="">
+    <p>“ SHOPLINE 在行動裝置上操作的順暢度很高；使用者給的建議與意見會採納，處理的速度也不錯；還<br>一直有新功能推出，不斷成長。 ”<br><br><span>Stan</span><br>BONNY&READ店長
+    </p>
+  </div>
+  <div class="div-count">
+    <h2>全球超過 600,000 商家已使用 SHOPLINE 開店</h2>
+    <a href="" class="trial2">免費試用14天</a>
+  </div>
+  <footer class="footer">
+    <div class="footer-div1">
+      <a href="">關於我們</a>
+      <a href="#" class="a-padding">媒體專區</a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>網路開店</h4>
+        <ul>
+          <li><a href="#">特色總覽</a></li>
+          <li><a href="#">功能介紹</a></li>
+          <li><a href="#">版型主題</a></li>
+          <li><a href="#">SHOP Builder</a></li>
+          <li><a href="#">客戶案例</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>社群購物</h4>
+        <ul>
+          <li><a href="#">特色總覽</a></li>
+          <li><a href="#">功能介紹</a></li>
+          <li><a href="#">IG 直播 +1</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>零售 POS</h4>
+        <ul>
+          <li><a href="#">特色總覽</a></li>
+          <li><a href="#">功能介紹</a></li>
+          <li><a href="#">週邊硬體</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>我要開店</h4>
+        <ul>
+          <li><a href="#">開店方案</a></li>
+          <li><a href="#">開店說明會</a></li>
+          <li><a href="#">開店諮詢</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>更多資源</h4>
+        <ul>
+          <li><a href="#">開店資源區</a></li>
+          <li><a href="#">擴充功能商店</a></li>
+          <li><a href="#">新手問答</a></li>
+          <li><a href="#">電商教室</a></li>
+          <li><a href="#">DreamBig 創品牌</a></li>
+          <li><a href="#">電商數據庫</a></li>
+          <li><a href="#">LINE 官方帳號</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>產品支援</h4>
+        <ul>
+          <li><a href="#">產品最新動態</a></li>
+          <li><a href="#">常見問題中心</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>SHOPLINE</h4>
+        <ul>
+          <li><a href="#">合作機會</a></li>
+          <li><a href="#">精選夥伴</a></li>
+          <li><a href="#">資格與認證</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <a href="#" class="security-link">資訊安全保護專區</a>
+      </div>
+    </div>
+    <div class="service-time">
+      <div>服務時間 星期一至五 上午 10 點至晚上 7 點<br>© Copyright 2024 SHOPLINE Tech Co., Ltd.</div>
+      <div><img src="contact.jpg" alt=""></div>
+    </div>
+    <div>
+      <a href="" class="footer-a">網站地圖</a>
+      <a href="" class="footer-a1">隱私權政策 </a>
+      <a href="" class="footer-a1">會員條款</a>
+    </div>
+  </footer>
+</body>
+
+</html>
