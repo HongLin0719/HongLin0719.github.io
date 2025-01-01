@@ -165,6 +165,7 @@
             const guess = parseInt(inputNum.textContent, 10);
             if (isNaN(guess) || guess < min || guess > max) {
                 new bootstrap.Modal(document.getElementById('alertModal')).show();
+                inputNum.textContent = "";
                 return;
             }
 
