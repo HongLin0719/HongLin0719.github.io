@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>1A2B Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toast-containter">
+        <div id="msg-toast" class="toast align-items-center border-0" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body"></div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="win-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">恭喜過關!</h1>
+                </div>
+                <div class="modal-body">
+                    你猜對了答案！
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="win-reset-btn" class="btn btn-primary">重新開始</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container bg-white rounded shadow-sm p-4 mt-5">
+        <h1 class="text-center mb-4">1A2B 猜數字遊戲</h1>
+        <div class="btn-group d-flex mb-4" role="group" aria-label="Game controls">
+            <button id="start-btn" class="btn btn-primary">開始</button>
+            <button id="reset-btn" class="btn btn-danger" disabled>放棄重來</button>
+            <button id="hint-btn" class="btn btn-secondary" disabled>看答案</button>
+        </div>
+
+        <div class="mb-3">
+            <div class="input-group">
+                <span class="input-group-text">猜數字</span>
+                <input type="text" id="guess-input" class="form-control" placeholder="請輸入四位不重複的數字" maxlength="4"
+                    disabled>
+                <button id="guess-btn" class="btn btn-success" disabled>猜！</button>
+            </div>
+        </div>
+
+        <ul id="result-list" class="list-group"></ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        let answer = [];
+        function generateAnswer() {
+            const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            answer = [];
+            while (answer.length < 4) {
+                const randomIndex = Math.floor(Math.random() * numbers.length);
+                answer.push(numbers.splice(randomIndex, 1)[0]);
+            }
+        }
+
+        function checkGuess(guess) {
+            let a = 0, b = 0;
+            for (let i = 0; i < guess.length; i++) {
+                if (guess[i] == answer[i]) {
+                    a++;
+                } else if (answer.includes(Number(guess[i]))) {
+                    b++;
+                }
+            }
+            return `${a}A${b}B`;
+        }
+
+
+        function showToast(message, type) {
+            const msgToast = document.getElementById('msg-toast');
+            msgToast.querySelector('.toast-body').textContent = message;
+            msgToast.className = `toast align-items-center border-0 text-bg-${type}`;
+
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(msgToast);
+            toastBootstrap.show();
+        }
+
+        function handleButtons(start) {
+            document.getElementById('start-btn').disabled = !start;
+            document.getElementById('reset-btn').disabled = start;
+            document.getElementById('hint-btn').disabled = start;
+            document.getElementById('guess-input').disabled = start;
+            document.getElementById('guess-btn').disabled = start;
+        }
+
+        document.getElementById('start-btn').addEventListener('click', () => {
+            generateAnswer();
+            document.getElementById('guess-input').value = '';
+            handleButtons(false);
+            showToast('遊戲開始！請輸入4位不重複的數字', 'info');
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            document.getElementById('result-list').innerHTML = '';
+            handleButtons(true);
+            showToast('已重設遊戲！', 'warning');
+        });
+
+        document.getElementById('hint-btn').addEventListener('click', () => {
+            showToast(`答案是：${answer.join('')}`, 'secondary');
+        });
+
+        document.getElementById('guess-btn').addEventListener('click', () => {
+            const guessInput = document.getElementById('guess-input');
+            const guess = guessInput.value;
+
+            if (guess.length !== 4 || isNaN(guess) || new Set(guess).size !== 4) {
+                showToast('請輸入四位不重複的數字！', 'danger');
+                return;
+            }
+
+            const result = checkGuess(guess);
+            const resultItem = document.createElement('li');
+            resultItem.className = 'list-group-item';
+            resultItem.innerHTML = `<span class="badge ${result === '4A0B' ? 'bg-success' : 'bg-danger'}">${result}</span> ${guess}`;
+
+            document.getElementById('result-list').appendChild(resultItem);
+
+            guessInput.value = '';
+
+            if (result === '4A0B') {
+                let winModal = new bootstrap.Modal(document.getElementById('win-modal'));
+                winModal.show();
+                document.getElementById('guess-btn').disabled = true;
+                document.getElementById('guess-input').disabled = true;
+            }
+        });
+
+        document.getElementById('win-reset-btn').addEventListener('click', () => {
+            generateAnswer()
+            const winModal = bootstrap.Modal.getInstance(document.getElementById('win-modal'));;
+            winModal.hide();
+            document.getElementById('result-list').innerHTML = '';
+            document.getElementById('guess-input').value = '';
+            handleButtons(true);
+            showToast('遊戲重新開始！', 'info');
+
+        });
+    </script>
+</body>
+
+</html>
