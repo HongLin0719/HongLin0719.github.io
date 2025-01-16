@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happ. 小樹屋 - 活動場地、空間租借｜讓美好的事物與回憶就此發生</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="https://thehapp.com/build/assets/happ_logo.31f5a12c.svg" class="logo">
+        </a>
+        <button class="navbar-toggler btn rounded-pill btn-secondary bg-secondary text-white" type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars me-1"></i>
+          <i class="fa-solid fa-user"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item d-lg-none">
+              <a class="nav-link" href="#">登入</a>
+            </li>
+            <li class="nav-item d-lg-none">
+              <a class="nav-link" href="#">註冊</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">瀏覽空間</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="./project.html">企業辦公專案</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">暢遊方案</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">空間靈感</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">最愛空間</a>
+            </li>
+            <li class="nav-item d-lg-none">
+              <a class="nav-link" href="#">儲值點數</a>
+            </li>
+            <li class="nav-item d-lg-none">
+              <a class="nav-link" href="#">常見問題</a>
+            </li>
+            <li class="nav-item dropdown d-none d-lg-flex">
+              <a class="nav-link dropdown-toggle btn rounded-pill btn-secondary bg-secondary text-white" href="#"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-bars me-1"></i>
+                <i class="fa-solid fa-user"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">登入</a></li>
+                <li><a class="dropdown-item" href="#">註冊</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">儲值點數</a></li>
+                <li><a class="dropdown-item" href="#">常見問題</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <article class="banner px-5">
+    <h1 class="mb-4 mt-2">讓每次推開門都成為一段絕無僅有的美好時光</h1>
+    <form class="search-form" action="">
+      <div class="input-group bg-white rounded-2 mb-3 mb-lg-0 p-lg-3">
+        <label for="location">
+          <i class="fa-solid fa-search"></i>
+          <span class="d-none d-lg-inline">搜尋</span>
+        </label>
+        <input id="location" type="text" class="form-control border-0" placeholder="您想找些什麼呢？" aria-label="Username"
+          aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group bg-white rounded-2 mb-3 mb-lg-0 p-lg-3">
+        <label for="date">
+          <i class="fa-solid fa-calendar"></i>
+          <span class="d-none d-lg-inline">時間</span>
+        </label>
+        <input id="date" type="text" class="form-control border-0" placeholder="任何日期與時間" aria-label="Username"
+          aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group bg-white rounded-2 mb-3 mb-lg-0 p-lg-3">
+        <label for="guest">
+          <i class="fa-solid fa-user-alt"></i>
+          <span class="d-none d-lg-inline">人數</span>
+        </label>
+        <input id="guest" type="text" class="form-control border-0" placeholder="1-60+" aria-label="Username"
+          aria-describedby="basic-addon1">
+      </div>
+      <button class="btn btn-success">
+        <i class="fa-solid fa-search"></i>
+        搜尋
+      </button>
+    </form>
+  </article>
+  <article class="container events-container">
+    <h2 class="mb-3">受歡迎的使用情境</h2>
+    <section class="events">
+      <div class="card  text-white border-0 rounded-4 overflow-hidden">
+        <a href="#" class="text-decoration-none">
+          <img class="card-img" src="https://thehapp.com/build/img/event/business.jpg">
+          <div class="card-img-overlay d-flex justify-content-center align-items-center arti-div">
+            <h3 class="card-title m-0">商務/辦公</h3>
+          </div>
+        </a>
+      </div>
+      <div class="card  text-white border-0 rounded-4 overflow-hidden">
+        <a href="#" class="text-decoration-none">
+          <img class="card-img" src="https://thehapp.com/build/img/event/education.jpg">
+          <div class="card-img-overlay d-flex justify-content-center align-items-center arti-div">
+            <h3 class="card-title m-0">課程/教學</h3>
+          </div>
+        </a>
+      </div>
+      <div class="card  text-white border-0 rounded-4 overflow-hidden">
+        <a href="#" class="text-decoration-none">
+          <img class="card-img" src="https://thehapp.com/build/img/event/videography.jpg">
+          <div class="card-img-overlay d-flex justify-content-center align-items-center arti-div">
+            <h3 class="card-title m-0">攝影/錄影</h3>
+          </div>
+        </a>
+      </div>
+      <div class="card  text-white border-0 rounded-4 overflow-hidden">
+        <a href="#" class="text-decoration-none">
+          <img class="card-img" src="https://thehapp.com/build/img/event/gathering.jpg">
+          <div class="card-img-overlay d-flex justify-content-center align-items-center arti-div">
+            <h3 class="card-title m-0">聚會</h3>
+          </div>
+        </a>
+      </div>
+      <div class="card  text-white border-0 rounded-4 overflow-hidden">
+        <a href="#" class="text-decoration-none">
+          <img class="card-img" src="https://thehapp.com/build/img/event/learning.jpg">
+          <div class="card-img-overlay d-flex justify-content-center align-items-center arti-div">
+            <h3 class="card-title m-0">讀書/討論</h3>
+          </div>
+        </a>
+      </div>
+      <div class="card  text-white border-0 rounded-4 overflow-hidden">
+        <a href="#" class="text-decoration-none">
+          <img class="card-img" src="https://thehapp.com/build/img/event/mental.jpg">
+          <div class="card-img-overlay d-flex justify-content-center align-items-center arti-div">
+            <h3 class="card-title m-0">心靈成長</h3>
+          </div>
+        </a>
+      </div>
+    </section>
+    <section class="event-chips d-flex flex-wrap mt-4">
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">商品攝影</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">人像攝影</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">直播</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">記者會</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">影片拍攝</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">生日派對</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">家庭聚會</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">電影欣賞會</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">朋友聚會</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">聖誕派對</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">桌遊</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">遠距工作</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">臨時辦公室/工作室</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">會議室</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">線上面試</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">研討會/交流會</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">講座/培訓</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">兒童課程</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">小班教學/家教</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">手作課程</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">讀書會</a>
+      <a href="#" class="chip px-3 py-2 text-decoration-none text-black">小組討論</a>
+    </section>
+    <div class="d-flex justify-content-end align-items-center mt-4">
+      <a href="#" class="text-black">查看所有選項</a>
+      <span>→</span>
+    </div>
+  </article>
+  <article class="container poster-container">
+    <div class="poster swiper">
+      <div class="swiper-wrapper">
+        <a href="#" class="swiper-slide rounded-2 overflow-hidden">
+          <img src="./swiper-1.jpeg" class="w-100 h-100 object-fit-cover align-top ">
+        </a>
+        <a href="#" class="swiper-slide rounded-2 overflow-hidden">
+          <img src="/swiper-2.jpeg" class="w-100 h-100 object-fit-cover align-top ">
+        </a>
+        <a href="#" class="swiper-slide rounded-2 overflow-hidden">
+          <img src="/swiper-3.jpeg" class="w-100 h-100 object-fit-cover align-top ">
+        </a>
+      </div>
+      <div class="dots-list"></div>
+      <div class="pre-btn"><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="next-btn"><i class="fa-solid fa-chevron-right"></i></div>
+    </div>
+  </article>
+  <article class="container-fluid promote-container">
+    <div class="container-lg d-lg-flex align-items-center">
+      <div class="img-box rounded-2 overflow-hidden">
+        <img src="./new-branch.jpg" class="w-100 h-100 object-fit-cover align-top">
+      </div>
+      <div class="content mt-3 mt-lg-0">
+        <h2 class="fw-bold">台南分館 虹樹<br>
+          坐落友愛街全新開幕！</h2>
+        <a href="#">立即參觀體驗 →</a>
+      </div>
+    </div>
+    <div class="promote-carousel swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <a href="#" class="card bg-dark text-white border-0 rounded-2 overflow-hidden">
+            <img class="card-img" src="./branch101.jpg">
+            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-start">
+              <p class="card-text">虹樹 101 <i class="fa-solid fa-people-group"> 2</i></p>
+              <p class="card-text">$180 / 小時</p>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="#" class="card bg-dark text-white border-0 rounded-2 overflow-hidden">
+            <img class="card-img" src="./branch102.jpg">
+            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-start">
+              <p class="card-text">虹樹 102 <i class="fa-solid fa-people-group"> 4</i></p>
+              <p class="card-text">$200 / 小時</p>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="#" class="card bg-dark text-white border-0 rounded-2 overflow-hidden">
+            <img class="card-img" src="./branch103.jpg">
+            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-start">
+              <p class="card-text">虹樹 103 <i class="fa-solid fa-people-group"> 2</i></p>
+              <p class="card-text">$160 / 小時</p>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="#" class="card bg-dark text-white border-0 rounded-2 overflow-hidden">
+            <img class="card-img" src="./branch201.jpg">
+            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-start">
+              <p class="card-text">虹樹 201 <i class="fa-solid fa-people-group"> 12</i></p>
+              <p class="card-text">$310 / 小時</p>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="#" class="card bg-dark text-white border-0 rounded-2 overflow-hidden">
+            <img class="card-img" src="./branch202.jpg">
+            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-start">
+              <p class="card-text">虹樹 202 <i class="fa-solid fa-people-group"> 4</i></p>
+              <p class="card-text">$180 / 小時</p>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="#" class="card bg-dark text-white border-0 rounded-2 overflow-hidden">
+            <img class="card-img" src="./branch301.jpg">
+            <div class="card-img-overlay d-flex flex-column justify-content-end align-items-start">
+              <p class="card-text">虹樹 301 <i class="fa-solid fa-people-group"> 10</i></p>
+              <p class="card-text">$280 / 小時</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="container recommend-container">
+    <h2 class="mb-3 w-100">遠距工作也要專注高效率</h2>
+    <p class="mb-3 w-100">在零打擾的專屬空間，找回屬於自己的專注節奏
+      <a href="#" class="text-black text-decoration-none article-more">更多遠距工作空間</a>
+    </p>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <a class="card text-decoration-none border-0">
+            <img src="./branch-1.jpg" class="mb-2">
+            <div>
+              <h3 class="mb-3">桂竹分館 ｜ 7 間 </h3>
+              <p>捷運士林站 1 分鐘</p>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a class="card text-decoration-none border-0">
+            <img src="./branch-2.jpg" class="mb-2">
+            <div>
+              <h3 class="mb-3">木棉分館 ｜ 11 間 </h3>
+              <p>捷運善導寺站 1 分鐘</p>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a class="card text-decoration-none border-0">
+            <img src="./branch-3.jpg" class="mb-2">
+            <div>
+              <h3 class="mb-3">月橘分館 ｜ 8 間 </h3>
+              <p>捷運民權西站 4 分鐘</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="container recommend-container">
+    <h2 class="mb-3 w-100">聚會新選擇 防疫不打折</h2>
+    <p class="mb-3 w-100">舒適安心聚會空間，享受與朋友們再次相聚的快樂
+      <a href="#" class="text-black text-decoration-none article-more">更多空間</a>
+    </p>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <a class="card text-decoration-none border-0">
+            <img src="./branch-4.jpg" class="mb-2">
+            <div>
+              <h3 class="mb-2">巒大杉 101 ｜
+                <i class="fa-solid fa-people-group mb-3"> 24</i>
+                <p>$ 660 - $ 730</p>
+              </h3>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a class="card text-decoration-none border-0">
+            <img src="./branch-5.jpg" class="mb-2">
+            <div>
+              <h3 class="mb-2">蒲公英 909 ｜
+                <i class="fa-solid fa-people-group mb-3"> 5</i>
+                <p>$ 280 - $ 310</p>
+              </h3>
+            </div>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a class="card text-decoration-none border-0">
+            <img src="./branch-6.jpg" class="mb-2">
+            <div>
+              <h3 class="mb-2"> 木棉 205 ｜
+                <i class="fa-solid fa-people-group mb-3"> 6</i>
+                <p>$ 320 - $ 350</p>
+              </h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="container home-promote mb-5 mt-3">
+    <div class="home-promote-left">
+      <h2>企業遠距辦公方案</h2>
+      <p>按人數、地點客製專屬多日租方案<br>
+        幫您節省租金成本、提升團隊工作效率</p>
+      <a href="#" class="btn btn-success">了解方案</a>
+    </div>
+    <div class="home-promote-right"></div>
+  </article>
+  <article class="container home-about mb-3 mt-3">
+    <div class="home-about-left"></div>
+    <div class="home-about-right">
+      <h2>我們相信，在這裡發生的每件事情都有著超越你我想像的創造力</h2>
+      <p>不論是工作、上課、錄Podcast、閱讀，或是做上一整天的白日夢，在這裡，你將擁有無限大的可能性，盡情展現「實現此刻」的能力。</p>
+      <a href="#" class="btn btn-outline-success">認識 Happ. 小樹屋</a>
+    </div>
+  </article>
+
+  <article class="container use-container">
+    <h2 class="mb-3">輕鬆使用 Happ. 小樹屋</h2>
+    <p>簡單三步驟，快速完成場地預訂！</p>
+    <div class="row use-list">
+      <div class="use-list-sub">
+        <i class="fa-regular fa-calendar-check"></i>
+        <div>
+          <p>線上預訂空間</p>
+          <p>在網站上尋找合適空間，確認好租用時段，30 秒輕鬆完成預訂。</p>
+        </div>
+      </div>
+      <div class="use-list-sub">
+        <i class="fa-solid fa-fingerprint"></i>
+        <div>
+          <p>專屬密碼進出空間</p>
+          <p>透過訂單顯示的專屬密碼，即可在租用時段內自由進出使用場地。</p>
+        </div>
+      </div>
+      <div class="use-list-sub">
+        <i class="fa-solid fa-edit"></i>
+        <div>
+          <p>免費修改與取消預訂</p>
+          <p>預訂開始時間的 48 小時前，都能回到網站無條件修改或取消訂單。</p>
+        </div>
+      </div>
+    </div>
+
+  </article>
+
+  <article class="home-footer-container">
+    <div>
+      <h2>立刻預訂屬於你的美好時光</h2>
+      <p>在專屬的時間與空間裡，盡情揮灑無限的創造力</p>
+      <a class="btn btn-success px-3 py-2">前往瀏覽空間</a>
+    </div>
+  </article>
+
+  <footer>
+    <div class="container-lg">
+      <div class=" d-lg-flex justify-content-lg-between">
+        <div class="main mb-2">
+          <div class="logo mb-2">
+            <img src="https://thehapp.com/build/assets/happ_footer_logo.b92eb508.svg" class="logo">
+          </div>
+          <h3 class="mb-3">讓每次推開門 都是一段絕無僅有的美好時光</h3>
+          <p>Happ. 小樹屋想帶給你的不僅僅是空間，更是一段絕無僅有的時光；獻給每個「實現此刻」的你，讓美好的事物與回憶就此發生。</p>
+        </div>
+        <div class="sub">
+          <h3>Happ. 小樹屋</h3>
+          <ul>
+            <li>
+              <a href="#">空間靈感</a>
+            </li>
+            <li>
+              <a href="#">品牌願景</a>
+            </li>
+            <li>
+              <a href="#">台南空間</a>
+            </li>
+            <li>
+              <a href="#">台中空間</a>
+            </li>
+            <li>
+              <a href="#">Sitemap</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub">
+          <h3>空間服務</h3>
+          <ul>
+            <li>
+              <a href="#">瀏覽空間</a>
+            </li>
+            <li>
+              <a href="#">最愛空間</a>
+            </li>
+            <li>
+              <a href="#">暢遊方案</a>
+            </li>
+            <li>
+              <a href="#">企業辦公專案</a>
+            </li>
+            <li>
+              <a href="#">常見問答</a>
+            </li>
+            <li>
+              <a href="#">儲值點數</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub">
+          <h3>會員條款</h3>
+          <ul>
+            <li>
+              <a href="#">使用者條款</a>
+            </li>
+            <li>
+              <a href="#">隱私權保護政策</a>
+            </li>
+            <li>
+              <a href="#">暢遊方案條款</a>
+            </li>
+            <li>
+              <a href="#">儲值點數說明</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub">
+          <h3>聯絡我們</h3>
+          <ul>
+            <li><a href="#"><i class="fa-brands fa-line line-icon"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divide"></div>
+      <p class="footer-copyright">© Happ. 小樹屋 好域股份有限公司 統一編號：52380939 All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
