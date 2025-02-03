@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        #calendar {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .fc-daygrid-day:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            transition: background-color 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .fc-event:hover {
+            background-color: rgba(30, 144, 255, 0.8);
+            transition: background-color 0.2s ease-in-out;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calendar"></div>
+    
+    <script src="./main.js"></script>
+</body>
+
+</html>
