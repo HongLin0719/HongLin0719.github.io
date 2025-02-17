@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>去趣chicTrip | 旅遊商城</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
+  <!-- Element Plus -->
+  <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+  <style>
+    /* 基本樣式 */
+    body {
+      font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
+      color: #404040;
+      overflow-x: hidden;
+      width: 100vw;
+      max-width: 100vw;
+      border-top: 10px solid #00aedc;
+    }
+
+    .top-bar {
+      padding: 2vh 4vw;
+      height: 97.5px;
+    }
+
+    .search-bar {
+      width: 50%;
+      height: 56px;
+      padding: 0 20px;
+    }
+
+    .search-icon {
+      color: #00aedc;
+      border-radius: 5px;
+    }
+
+    .el-button,
+    .el-input__inner {
+      font-size: 14px;
+      font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
+      color: #404040;
+    }
+
+    .el-icon {
+      font-size: 24px;
+    }
+
+    .top-bar a.el-button,
+    .category-list a.el-button {
+      border: none;
+      text-decoration: none;
+    }
+
+    .top-bar a.el-button:hover,
+    .category-list a.el-button:hover {
+      background: transparent;
+      color: #409eff;
+    }
+
+    .category-list .el-button {
+      font-size: 16px !important;
+    }
+
+    .category-link:hover {
+
+      color: #409eff;
+    }
+
+    .carousel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .product-container,
+    .product-container-tw {
+      padding: 2vh 4vw;
+    }
+
+    .see-more {
+      border: 1px solid #00aedc;
+      color: #00aedc;
+      background-color: transparent;
+      font-size: 16px;
+      padding: 5px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+      height: 40px;
+      text-decoration: none;
+    }
+
+    .see-more:hover {
+      border: 1px solid #00aedc;
+      background-color: #dff5f9;
+    }
+
+    .h2-subtitle {
+      display: flex;
+      align-items: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin: 0;
+      /* 移除預設邊距 */
+      gap: 12px;
+      /* 標題和圖片之間的間距 */
+    }
+
+    .subtitle {
+      display: flex;
+      align-items: center;
+      margin: 0.83em 0;
+      width: 100%;
+      gap: 12px;
+      /* 使用 gap 來統一管理元素間距 */
+    }
+
+    .subtitle::before {
+      content: "";
+      width: 5px;
+      height: 30px;
+      border-radius: 20px;
+      background: #ffb300;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .country-title {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    .subtitle img {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .activity-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      padding: 10px 0;
+    }
+
+    .activity-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .activity-link {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .activity-item-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      width: 60px;
+      margin-bottom: 4px;
+      padding: 14px;
+      background: #dff2f4;
+      border-radius: 10px;
+    }
+
+    .activity-item-img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .activity-item div {
+      font-size: 12px;
+      text-align: center;
+      color: #404040;
+      line-height: 1.3;
+    }
+
+    .product-container {
+      position: relative;
+      background: rgba(0, 174, 220, .2);
+      padding: 50px 22px 22px 22px;
+      border-radius: 10%;
+      min-width: 222px;
+      max-width: 315px;
+      flex-grow: 1;
+    }
+
+    .product-container-tw {
+      position: relative;
+      background: rgba(255, 179, 0, .2);
+      padding: 50px 22px 22px 22px;
+      border-radius: 10%;
+      min-width: 222px;
+      max-width: 315px;
+      flex-grow: 1;
+    }
+
+    /* Keep 4 columns on mobile */
+    @media screen and(max-width: 768px) {
+      .activity-container {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+      }
+
+      .activity-item-box {
+        height: 60px;
+        width: 60px;
+        padding: 4px;
+      }
+
+      .activity-item-img {
+        width: 35px;
+        height: 35px;
+      }
+
+      .activity-item div {
+        font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
+        font-size: 14px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-left {
+        display: none !important;
+        flex-direction: column;
+      }
+
+      .footer-right {
+        width: 100%;
+        padding: 0;
+        margin-top: 20px;
+      }
+
+      .footer-column {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+
+    .ad-swiper-button-prev,
+    .ad-swiper-button-next {
+      width: 50px;
+      height: 50px;
+      background-color: #fff;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      position: absolute;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .ad-swiper-button-prev::after,
+    .ad-swiper-button-next::after {
+      font-size: 20px;
+      color: #00aedc;
+    }
+
+    .ad-swiper-button-prev:hover,
+    .ad-swiper-button-next:hover {
+      background-color: #f0f0f0;
+    }
+
+    .swiper-slide {
+      width: 400px;
+    }
+
+    .swiper-slide {
+      transition: opacity 0.5s ease;
+    }
+
+    .carousel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    /* Adjust spacing for very small screens */
+    @media screen and(max-width: 360px) {
+      .activity-container {
+        gap: 6px;
+      }
+
+      .activity-item-box {
+        height: 40px;
+        width: 40px;
+        padding: 8px;
+      }
+    }
+
+    @media screen and (max-width: 991.98px) {
+
+      .login-text,
+      .category-list {
+        display: none !important;
+      }
+
+      .top-bar .search-bar {
+        display: none;
+      }
+
+      .mobile-search-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 600px;
+        padding: 0 20px;
+        margin: 0 auto;
+        min-height: 56px;
+      }
+
+      .mobile-search-bar .search-bar {
+        display: block;
+        width: 100%;
+        height: 56px;
+      }
+
+      .pc-top-category-menu {
+        display: none;
+      }
+
+      .popular-container-pc {
+        display: none;
+      }
+
+    }
+
+    .product-container::before,
+    .product-container-tw::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      background: linear-gradient(#939393 30%, #cbcbcb);
+      border-radius: 10%;
+    }
+
+    .product-container-inner {
+      display: block;
+      top: 8px;
+      left: 10px;
+      right: 10px;
+      height: 34px;
+      position: absolute;
+      z-index: 1;
+      background: linear-gradient(#67deff, #00AEDC);
+      border-radius: 13% 13% 0 0 / 100% 100% 0 0;
+    }
+
+    .product-container-inner-tw {
+      display: block;
+      top: 8px;
+      left: 10px;
+      right: 10px;
+      height: 34px;
+      position: absolute;
+      z-index: 1;
+      background: linear-gradient(#fed26a, #FFB300);
+      border-radius: 13% 13% 0 0 / 100% 100% 0 0;
+    }
+
+    .product-container-inner::after,
+    .product-container-inner-tw::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 7% / 50%;
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%);
+    }
+
+    .product-container-card {
+      box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+      border-radius: 10px;
+      vertical-align: top;
+      background: #fff;
+      position: relative;
+      z-index: 0;
+      height: 380px;
+    }
+
+    .product-container-card-like {
+      border-radius: 10px;
+      vertical-align: top;
+      background: #fff;
+      position: relative;
+      z-index: 0;
+      height: 380px;
+    }
+
+    /* 當 .product-container-card 被 hover 時，讓圖片放大並變清晰 */
+    .product-container-card:hover .product-container-img img,
+    .product-container-card-like :hover .product-container-img img {
+      transform: scale(1.2);
+      /* 放大 1.2 倍 */
+      opacity: 1;
+      /* 變清晰 */
+      transition: all 1s;
+    }
+
+    .product-container-card a, .product-container-card-like a{
+      text-decoration: none;
+    }
+
+    .product-container-card:hover, .product-container-card-like:hover{
+      opacity: .8;
+    }
+
+
+    .product-container-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .product-container-img {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      height: 50%;
+      min-height: 50%;
+      flex-shrink: 0;
+      border-radius: 15px;
+    }
+
+    .product-container-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-container-info {
+      width: 100%;
+      padding: 12px;
+    }
+
+
+
+    .product-container-name h3 {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 8px 0 4px 0;
+      color: #333;
+    }
+
+    .product-container-description p {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 200px;
+    }
+
+    .product-container-price {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      font-size: 14px;
+      color: #000;
+    }
+
+    .product-container-price span {
+      text-decoration: line-through;
+      color: #999;
+      margin-right: 8px;
+    }
+
+    .product-container-price strong {
+      color: #e60000;
+      font-size: 16px;
+      margin-right: 3px;
+    }
+
+    .product-container-location {
+      top: 15px;
+      left: 20px;
+      margin: 8px;
+      padding: 4px;
+      position: absolute;
+      background-color: white;
+      border-radius: 5px;
+      z-index: 2;
+    }
+
+    .product-container-location span {
+      font-size: 14px;
+      color: #777;
+    }
+
+    .product-container-location span .el-icon {
+      font-size: 16px;
+      color: #00aedc;
+      position: relative;
+      top: 3px;
+    }
+
+    .product-container-tag {
+      background-color: #FFB300;
+      color: #fff;
+      border-radius: 5px;
+
+      padding: 3px 8px;
+      /* 減小內邊距 */
+      float: left;
+    }
+
+    /* For desktop and larger screens */
+    @media screen and (min-width: 992px) {
+      .country-title::after {
+        content: "";
+        display: block;
+        flex-grow: 1;
+        height: 1px;
+        border-bottom: 1px solid #00aedc;
+        margin-left: 12px;
+      }
+
+      .login-logo {
+        display: none;
+      }
+
+      .mobile-search-bar {
+        display: none;
+      }
+
+      .popular-container {
+        display: none;
+      }
+
+      .mobile-only-section {
+        display: none;
+      }
+    }
+
+    .aircraft-div {
+      position: relative;
+      overflow: hidden;
+      padding: 60px 0px 30px 0px;
+      margin-top: -30px;
+    }
+
+    .aircraft,
+    .aircraft-tw {
+      height: 80px;
+      background-color: #838383;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .aircraft::before {
+      content: "";
+      position: absolute;
+      height: 60px;
+      width: 60px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: 1;
+      will-change: transform, opacity;
+      background-image: url('https://travel.hotaigo.com.tw/aircraft.svg');
+      animation: takeoff 10s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+    }
+
+    @keyframes takeoff {
+      0% {
+        transform: translateX(50px);
+        margin-top: 0;
+        opacity: 1;
+      }
+
+      10% {
+        margin-top: 0;
+      }
+
+      40% {
+        margin-top: -160px;
+        transform: translateX(110vw);
+        opacity: 1;
+      }
+
+      45% {
+        margin-top: -160px;
+        transform: translateX(110vw);
+        opacity: 0;
+      }
+
+      50% {
+        margin-top: -20px;
+        transform: translateX(-60px);
+        opacity: 0;
+      }
+
+      51% {
+        margin-top: -20px;
+        transform: translateX(-60px);
+        opacity: 1;
+      }
+
+      55% {
+        margin-top: -3px;
+        opacity: 1;
+      }
+
+      70% {
+        margin-top: 0px;
+        transform: translateX(50px);
+      }
+
+      90%,
+      100% {
+        margin-top: 0px;
+        transform: translateX(50px);
+        opacity: 1;
+      }
+    }
+
+    .aircraft-runway {
+      animation: runway 10s ease;
+      animation-iteration-count: infinite;
+      position: absolute;
+      width: 10000px;
+      height: 4px;
+      background-image: repeating-linear-gradient(90deg, white, white 44px, transparent 44px, transparent 88px);
+      will-change: transform;
+    }
+
+    @keyframes runway {
+      0% {
+        transform: translateX(0);
+
+      }
+
+      80%,
+      100% {
+        transform: translateX(-2992px);
+      }
+    }
+
+    .aircraft-runway::before,
+    .aircraft-runway-tw::before {
+      top: -34px;
+      content: "";
+      position: absolute;
+      width: 100%;
+      background-color: #fff;
+      left: 0;
+      height: 2px;
+    }
+
+    .aircraft-runway::after,
+    .aircraft-runway-tw::after {
+      bottom: -34px;
+      content: "";
+      position: absolute;
+      width: 100%;
+      background-color: #fff;
+      left: 0;
+      height: 2px;
+    }
+
+    .aircraft-tw::before {
+      content: "";
+      position: absolute;
+      height: 60px;
+      width: 60px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: 1;
+      will-change: transform, opacity;
+
+      background-image: url('https://travel.hotaigo.com.tw/aircraft-local.svg');
+      animation: landing 10s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+    }
+
+    @keyframes landing {
+      0% {
+        transform: translateX(50px) rotate(180deg);
+        margin-top: 0;
+        opacity: 1;
+      }
+
+      10% {
+        margin-top: 0;
+        opacity: 1;
+        transform: translateX(-100px) rotate(180deg);
+      }
+
+      11% {
+        opacity: 0;
+        transform: translateX(-100px) rotate(180deg);
+      }
+
+      11.1% {
+        opacity: 0;
+        transform: translateX(110vw) rotate(180deg);
+      }
+
+      11.2% {
+        margin-top: -160px;
+        opacity: 1;
+        transform: translateX(110vw) rotate(180deg);
+      }
+
+      40% {
+        margin-top: -3px;
+      }
+
+      55% {
+        margin-top: 0px;
+      }
+
+      70%,
+      100% {
+        margin-top: 0px;
+        transform: translateX(50px) rotate(180deg);
+      }
+    }
+
+    .aircraft-runway-tw {
+      animation: runway-tw 10s ease;
+      animation-iteration-count: infinite;
+      position: absolute;
+      width: 10000px;
+      height: 4px;
+      background-image: repeating-linear-gradient(90deg, white, white 44px, transparent 44px, transparent 88px);
+      will-change: transform;
+    }
+
+    @keyframes runway-tw {
+      0% {
+        transform: translateX(-2992px);
+
+      }
+
+      80%,
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .product-swiper-button-prev,
+    .product-swiper-button-next {
+      width: 50px;
+      height: 50px;
+      background-color: #fff;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      position: absolute;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-swiper-button-prev::after,
+    .product-swiper-button-next::after {
+      font-size: 20px;
+      color: #00aedc;
+    }
+
+    .product-swiper-button-prev:hover,
+    .product-swiper-button-next:hover {
+      background-color: #f0f0f0;
+    }
+
+    .category-swiper {
+      padding: 0 40px;
+      /* 留出導航按鈕空間 */
+      position: relative;
+    }
+
+    .category-swiper .swiper-slide {
+      width: auto !important;
+      /* 根據內容自動調整寬度 */
+      display: flex;
+      justify-content: center;
+    }
+
+    .category-link {
+      white-space: nowrap;
+      padding: 8px 16px;
+      transition: all 0.3s;
+      border: none;
+
+      font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
+      font-size: 16px;
+      color: #404040;
+      text-decoration: none;
+    }
+
+
+    .category-swiper-next,
+    .category-swiper-prev {
+      --swiper-navigation-size: 20px;
+      padding: 12px;
+      border-radius: 50%;
+    }
+
+    .category-swiper-next::after,
+    .category-swiper-prev::after {
+      color: #c0c0c1;
+      font-weight: bold;
+    }
+
+    .ad-swiper::before,
+    .ad-swiper::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 10%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .ad-swiper::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    }
+
+    .ad-swiper::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    }
+
+    .travel-deal {
+      width: 300px;
+      height: 200px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
+      border-radius: 10px;
+      background: #fff;
+      position: relative;
+      z-index: 0;
+      overflow: hidden;
+      /* 確保圖片放大時不會影響外部 */
+    }
+
+    .travel-deal img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* 確保圖片填滿不變形 */
+      transition: transform 0.5s ease;
+      /* 增加平滑過渡效果 */
+
+    }
+
+    .travel-deal img:hover {
+      transform: scale(1.2);
+      /* 放大 1.2 倍 */
+      transition: transform 1s ease;
+      opacity: .8;
+    }
+
+    .travel-grid,
+    .tw-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      /* 建立 4 列 */
+      grid-template-rows: auto;
+      gap: 15px;
+      /* 控制卡片間距 */
+      padding: 20px 0;
+    }
+
+    /* 卡片基本樣式 */
+    .card,
+    .tw-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .card img,
+    .tw-card img {
+      overflow: hidden;
+      /* 確保內容不會超出卡片 */
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* 確保圖片不變形 */
+      display: block;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    /* 懸停放大效果 */
+    .card:hover img,
+    .tw-card:hover img {
+      transform: scale(1.2);
+      opacity: .8;
+    }
+
+    /* 標題文字 */
+    .title {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 5px;
+    }
+
+
+    .card:nth-child(1) {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+
+    .card:nth-child(2) {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+
+    .card:nth-child(3) {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+
+    .card:nth-child(4) {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+    }
+
+    .final-card {
+      grid-column: 3 / 5;
+      grid-row: 1 / 3;
+    }
+
+    /* 左側大圖 */
+    .tw-card:nth-child(1) {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+      /* 佔據兩行 */
+    }
+
+    /* 右側四張小圖 */
+    .tw-card:nth-child(2) {
+      grid-column: 3 / 4;
+      grid-row: 1 / 2;
+    }
+
+    .tw-card:nth-child(3) {
+      grid-column: 4 / 5;
+      grid-row: 1 / 2;
+    }
+
+    .tw-card:nth-child(4) {
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+    }
+
+    .tw-card:nth-child(5) {
+      grid-column: 4 / 5;
+      grid-row: 2 / 3;
+    }
+
+    .footer {
+      background-color: #dbdbdb;
+      padding: 20px 0;
+
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px 30px 20px;
+      align-items: flex-start;
+    }
+
+    /* 左側區塊：兩欄 */
+    .footer-left {
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer-column {
+      width: 48%;
+    }
+
+    .footer-column h4 {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 5px;
+    }
+
+    .footer-column ul li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .footer-column ul li a:hover {
+      color: #787878;
+    }
+
+    /* 右側區塊 */
+    .footer-right {
+      width: 50%;
+      padding-left: 20px;
+    }
+
+    .footer-right h4 {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .footer-right p {
+      margin-bottom: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #959595;
+    }
+
+    .footer-right a {
+      color: #00aedc;
+    }
+
+    /* 版權資訊 */
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 20px auto 0;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 12px;
+      color: #959595;
+      border-top: 1px solid rgba(179, 179, 179, .5);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 頂部橫條 -->
+    <header>
+      <!-- 導覽列 -->
+      <div class="container top-bar d-flex align-items-center justify-content-between">
+        <!-- 左邊 LOGO -->
+        <a href="#" aria-label="去趣chicTrip | 旅遊商城">
+          <img src="logo.jpg" alt="Logo" />
+        </a>
+        <!-- 搜尋欄 (桌面版) -->
+        <el-input v-model="searchQuery" class="search-bar mx-auto" placeholder="輸入目的地、景點、體驗行程或活動名稱...">
+          <template #prefix>
+            <el-icon class="search-icon">
+              <search />
+            </el-icon>
+          </template>
+        </el-input>
+        <!-- 右邊按鈕區塊 -->
+        <div class="d-flex">
+          <a href="#" class="el-button login-text">旅遊規劃必備APP</a>
+          <a href="#" class="el-button login-text">登入/註冊</a>
+          <!-- 992px以下顯示 -->
+          <a href="#" class="el-button login-logo">
+            <el-icon>
+              <User />
+            </el-icon>
+          </a>
+          <a href="#" class="el-button">
+            <el-icon>
+              <shopping-cart />
+            </el-icon>
+          </a>
+        </div>
+      </div>
+
+      <!-- 手機版搜尋欄 -->
+      <div class="mobile-search-bar">
+        <div class="mobile-search-bar w-100">
+          <el-input v-model="searchQuery" placeholder="輸入目的地、景點、體驗行程或活動名稱...">
+            <template #prefix>
+              <el-icon class="search-icon">
+                <search />
+              </el-icon>
+            </template>
+          </el-input>
+        </div>
+      </div>
+
+      <!-- 分類列表 -->
+      <section class=" container pc-top-category-menu">
+        <div class="category-swiper swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(item, index) in categories" :key="index">
+              <a href="#" class=" category-link">
+                {{ item }}
+              </a>
+            </div>
+          </div>
+
+          <div class="swiper-button-next category-swiper-next"></div>
+          <div class="swiper-button-prev category-swiper-prev"></div>
+        </div>
+      </section>
+    </header>
+
+    <!-- 輪播廣告 -->
+    <div id="carousel" class="container py-md-4 py-0">
+      <div class="ad-swiper swiper" :style="{ height: carouselHeight }">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="(item, index) in carouselImages" :key="index">
+            <img :src="item" class="carousel-img" alt="廣告圖片" />
+          </div>
+        </div>
+        <div class="ad-swiper-pagination swiper-pagination"></div>
+        <div class="ad-swiper-button-next swiper-button-next"></div>
+        <div class="ad-swiper-button-prev swiper-button-prev"></div>
+      </div>
+    </div>
+
+    <!-- 手機版活動分類 -->
+    <section class="container mobile-only-section">
+      <div class="subtitle">
+        <h2 class="h2-subtitle">熱門活動分類</h2>
+      </div>
+
+      <div class="activity-container">
+        <div v-for="(theme, index) in themes" :key="index" class="activity-item">
+          <a :href="'/search?theme=' + theme.id" class="activity-link">
+            <div class="activity-item-box">
+              <img class="activity-item-img" :src="theme.image" :alt="theme.name" />
+            </div>
+            <div>{{ theme.name }}</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 國家區塊 -->
+    <section class="container country-section">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <img src="https://travel.hotaigo.com.tw/flag/japan.svg" alt="flag" width="30" height="30" />
+        <h2 class="h2-subtitle country-title">日本</h2>
+        <div>
+          <a href="#" class="el-button see-more">查看更多</a>
+        </div>
+      </div>
+
+      <div class="swiper product-swiper product-swiper-0">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
+            <div class="product-container">
+              <div class="product-container-inner"></div>
+              <div class="product-container-card">
+                <a :href="product.link" :aria-label="product.name">
+                  <div class="product-container-location d-flex">
+                    <span><el-icon>
+                        <location />
+                      </el-icon>東京</span>
+                  </div>
+                  <section class="product-container-content">
+                    <div class="product-container-img">
+                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                    </div>
+                    <div class="product-container-info">
+                      <div class="product-container-name">
+                        <h3>{{ product.name }}</h3>
+                      </div>
+                      <div class="product-container-description">
+                        <p>{{product.description}}</p>
+                      </div>
+                      <div class="product-container-price">
+                        <span>TWD: {{ product.originalPrice }}</span>
+                        TWD: <strong>{{ product.price }} </strong>起
+                      </div>
+                      <div class="product-container-tag">
+                        <div>免費取消</div>
+                      </div>
+                    </div>
+                  </section>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 分頁器和導航按鈕 -->
+        <div class="swiper-pagination swiper-pagination-0"></div>
+        <div class="product-swiper-button-next swiper-button-next swiper-button-next-0"></div>
+        <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-0"></div>
+      </div>
+    </section>
+
+
+    <section class="container country-section">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <img src="https://travel.hotaigo.com.tw/flag/japan.svg" alt="flag" width="30" height="30" />
+        <h2 class="h2-subtitle country-title">日本</h2>
+        <div>
+          <a href="#" class="el-button see-more">查看更多</a>
+        </div>
+      </div>
+
+      <div class="swiper product-swiper product-swiper-1">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
+            <div class="product-container">
+              <div class="product-container-inner"></div>
+              <div class="product-container-card">
+                <a :href="product.link" :aria-label="product.name">
+                  <div class="product-container-location d-flex">
+                    <span><el-icon>
+                        <location />
+                      </el-icon>東京</span>
+                  </div>
+                  <section class="product-container-content">
+                    <div class="product-container-img">
+                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                    </div>
+                    <div class="product-container-info">
+                      <div class="product-container-name">
+                        <h3>{{ product.name }}</h3>
+                      </div>
+                      <div class="product-container-description">
+                        <p>{{product.description}}</p>
+                      </div>
+                      <div class="product-container-price">
+                        <span>TWD: {{ product.originalPrice }}</span>
+                        TWD: <strong>{{ product.price }} </strong>起
+                      </div>
+                      <div class="product-container-tag">
+                        <div>免費取消</div>
+                      </div>
+                    </div>
+                  </section>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 分頁器和導航按鈕 -->
+        <div class="swiper-pagination swiper-pagination-1"></div>
+        <div class="product-swiper-button-next swiper-button-next swiper-button-next-1"></div>
+        <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-1"></div>
+      </div>
+    </section>
+
+    <!-- 飛機 -->
+    <div class="aircraft-div">
+      <div class="aircraft">
+        <div class="aircraft-runway"></div>
+      </div>
+    </div>
+
+    <section class="container country-section">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <img src="https://travel.hotaigo.com.tw/flag/japan.svg" alt="flag" width="30" height="30" />
+        <h2 class="h2-subtitle country-title">日本</h2>
+        <div>
+          <a href="#" class="el-button see-more">查看更多</a>
+        </div>
+      </div>
+
+      <div class="swiper product-swiper product-swiper-2">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
+            <div class="product-container-tw">
+              <div class="product-container-inner-tw"></div>
+              <div class="product-container-card">
+                <a :href="product.link" :aria-label="product.name">
+                  <div class="product-container-location d-flex">
+                    <span><el-icon>
+                        <location />
+                      </el-icon>東京</span>
+                  </div>
+                  <section class="product-container-content">
+                    <div class="product-container-img">
+                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                    </div>
+                    <div class="product-container-info">
+                      <div class="product-container-name">
+                        <h3>{{ product.name }}</h3>
+                      </div>
+                      <div class="product-container-description">
+                        <p>{{product.description}}</p>
+                      </div>
+                      <div class="product-container-price">
+                        <span>TWD: {{ product.originalPrice }}</span>
+                        TWD: <strong>{{ product.price }} </strong>起
+                      </div>
+                      <div class="product-container-tag">
+                        <div>免費取消</div>
+                      </div>
+                    </div>
+                  </section>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 分頁器和導航按鈕 -->
+        <div class="swiper-pagination swiper-pagination-2"></div>
+        <div class="product-swiper-button-next swiper-button-next swiper-button-next-2"></div>
+        <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-2"></div>
+      </div>
+    </section>
+
+    <section class="container country-section">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <img src="https://travel.hotaigo.com.tw/flag/japan.svg" alt="flag" width="30" height="30" />
+        <h2 class="h2-subtitle country-title">日本</h2>
+        <div>
+          <a href="#" class="el-button see-more">查看更多</a>
+        </div>
+      </div>
+
+      <div class="swiper  product-swiper product-swiper-3">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
+            <div class="product-container-tw">
+              <div class="product-container-inner-tw"></div>
+              <div class="product-container-card">
+                <a :href="product.link" :aria-label="product.name">
+                  <div class="product-container-location d-flex">
+                    <span><el-icon>
+                        <location />
+                      </el-icon>東京</span>
+                  </div>
+                  <section class="product-container-content">
+                    <div class="product-container-img">
+                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                    </div>
+                    <div class="product-container-info">
+                      <div class="product-container-name">
+                        <h3>{{ product.name }}</h3>
+                      </div>
+                      <div class="product-container-description">
+                        <p>{{product.description}}</p>
+                      </div>
+                      <div class="product-container-price">
+                        <span>TWD: {{ product.originalPrice }}</span>
+                        TWD: <strong>{{ product.price }} </strong>起
+                      </div>
+                      <div class="product-container-tag">
+                        <div>免費取消</div>
+                      </div>
+                    </div>
+                  </section>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 分頁器和導航按鈕 -->
+        <div class="swiper-pagination swiper-pagination-3"></div>
+        <div class="product-swiper-button-next swiper-button-next swiper-button-next-3"></div>
+        <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-3"></div>
+      </div>
+    </section>
+
+    <!-- 飛機 -->
+    <div class="aircraft-div">
+      <div class="aircraft-tw">
+        <div class="aircraft-runway-tw"></div>
+      </div>
+    </div>
+
+
+    <section class="container">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <h2 class="h2-subtitle country-title">熱門遊程</h2>
+        <div>
+          <a href="#" class="el-button see-more">餐廳美食</a>
+        </div>
+        <div>
+          <a href="#" class="el-button see-more">景點門票</a>
+        </div>
+        <div>
+          <a href="#" class="el-button see-more">溫泉SPA</a>
+        </div>
+        <div>
+          <a href="#" class="el-button see-more">熱門活動</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <h2 class="h2-subtitle country-title">最新旅遊優惠</h2>
+        <div>
+        </div>
+      </div>
+
+      <div class="swiper product-swiper product-swiper-4">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
+            <a :href="product.link" :aria-label="product.name">
+              <section class="product-container-content">
+                <div class="travel-deal">
+                  <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                </div>
+              </section>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container popular-container-pc">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <h2 class="h2-subtitle country-title">熱門國家</h2>
+        <div>
+        </div>
+      </div>
+
+      <div class="travel-grid">
+        <div class="card">
+          <img src="public/products/japan/2.jpeg" alt="澳門玩樂">
+          <span class="title">澳門玩樂</span>
+        </div>
+        <div class="card">
+          <img src="public/products/japan/2.jpeg" alt="泰國玩樂">
+          <span class="title">泰國玩樂</span>
+        </div>
+        <div class="card">
+          <img src="public/products/japan/2.jpeg" alt="香港玩樂">
+          <span class="title">香港玩樂</span>
+        </div>
+        <div class="card">
+          <img src="public/products/japan/2.jpeg" alt="韓國玩樂">
+          <span class="title">韓國玩樂</span>
+        </div>
+        <div class="card final-card ">
+          <img src="public/products/japan/2.jpeg" alt="日本玩樂">
+          <span class="title">日本玩樂</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 991以下顯示 變swiper -->
+    <section class="container popular-container">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <h2 class="h2-subtitle country-title">熱門國家</h2>
+        <div>
+        </div>
+      </div>
+
+      <div class="swiper product-swiper product-swiper-5">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
+            <a :href="product.link" :aria-label="product.name">
+              <section class="product-container-content">
+                <div class="travel-deal">
+                  <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                </div>
+              </section>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container popular-container-pc">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <h2 class="h2-subtitle country-title">熱門城市</h2>
+        <div>
+        </div>
+      </div>
+
+      <div class="tw-grid">
+        <div class="tw-card">
+          <img src="public/products/japan/2.jpeg" alt="雙北之旅">
+          <span class="title">雙北之旅</span>
+        </div>
+        <div class="tw-card">
+          <img src="public/products/japan/2.jpeg" alt="雙北之旅">
+          <span class="title">桃竹苗之旅</span>
+        </div>
+        <div class="tw-card">
+          <img src="public/products/japan/2.jpeg" alt="雙北之旅">
+          <span class="title">南部之旅</span>
+        </div>
+        <div class="tw-card">
+          <img src="public/products/japan/2.jpeg" alt="雙北之旅">
+          <span class="title">中部之旅</span>
+        </div>
+        <div class="tw-card">
+          <img src="public/products/japan/2.jpeg" alt="雙北之旅">
+          <span class="title">東部之旅</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 991以下顯示 變swiper -->
+    <section class="container popular-container">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <h2 class="h2-subtitle country-title">熱門城市</h2>
+        <div>
+        </div>
+      </div>
+
+      <div class="swiper product-swiper product-swiper-6">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
+            <a :href="product.link" :aria-label="product.name">
+              <section class="product-container-content">
+                <div class="travel-deal">
+                  <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                </div>
+              </section>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container country-section">
+      <div class="subtitle justify-content-between d-flex align-items-center">
+        <img src="https://travel.hotaigo.com.tw/flag/japan.svg" alt="flag" width="30" height="30" />
+        <h2 class="h2-subtitle country-title">猜你喜歡</h2>
+      </div>
+
+      <div class="swiper  product-swiper product-swiper-7">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
+            <div class="product-container-card-like">
+              <a :href="product.link" :aria-label="product.name">
+                <div class="product-container-location d-flex">
+                  <span><el-icon>
+                      <location />
+                    </el-icon>東京</span>
+                </div>
+                <section class="product-container-content">
+                  <div class="product-container-img">
+                    <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                  </div>
+                  <div class="product-container-info">
+                    <div class="product-container-name">
+                      <h3>{{ product.name }}</h3>
+                    </div>
+                    <div class="product-container-description">
+                      <p>{{product.description}}</p>
+                    </div>
+                    <div class="product-container-price">
+                      <span>TWD: {{ product.originalPrice }}</span>
+                      TWD: <strong>{{ product.price }} </strong>起
+                    </div>
+                    <div class="product-container-tag">
+                      <div>免費取消</div>
+                    </div>
+                  </div>
+                </section>
+              </a>
+            </div>
+
+          </div>
+        </div>
+        <!-- 分頁器和導航按鈕 -->
+        <div class="swiper-pagination swiper-pagination-7"></div>
+        <div class="product-swiper-button-next swiper-button-next swiper-button-next-7"></div>
+        <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-7"></div>
+      </div>
+    </section>
+
+
+
+
+
+
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- 左側 50% 區塊，內部分為兩欄 -->
+        <div class="footer-left">
+          <!-- 第一欄：關於和泰相關 -->
+          <div class="footer-column">
+            <h4>關於和泰相關</h4>
+            <ul>
+              <li><a href="#">和泰Points介紹</a></li>
+              <li><a href="#">和泰集團會員</a></li>
+              <li><a href="#">和泰集團會員隱私權政策</a></li>
+              <li><a href="#">和泰集團常見問題</a></li>
+              <li><a href="#">和泰集團會員條款</a></li>
+            </ul>
+          </div>
+          <!-- 第二欄：關於去趣 -->
+          <div class="footer-column">
+            <h4>關於去趣</h4>
+            <ul>
+              <li><a href="#">FAQ專區</a></li>
+              <li><a href="#">客服專區</a></li>
+              <li><a href="#">隱私權政策</a></li>
+              <li><a href="#">免責聲明</a></li>
+              <li><a href="#">防詐騙提醒</a></li>
+              <li><a href="#">和泰集團相關服務</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- 右側 50% 區塊：旅行社資訊 -->
+        <div class="footer-right">
+          <h4>和漾旅行社股份有限公司</h4>
+          <p>旅遊商品由 和漾旅行社股份有限公司 提供</p>
+          <p>
+            代表人：吳品璁 | 統一編號：90356017 | 旅行社註冊編號：850800 | 品保協會會員編號：北2598號
+          </p>
+          <p>請點擊 <a href="#">客服專區</a> 專人為您服務</p>
+          <p>其他商品由 和泰聯網股份有限公司 提供</p>
+          <p>旅遊專線：(02)2506-2121 分機1436 週一至週五 (09:00-17:30)</p>
+          <p>
+            旅遊聯絡信箱：
+            service@chictrip.com.tw |
+            聯絡人：蘇聖惠
+          </p>
+          <p>
+            統一編號：55384114 | 地址：104台北市中山區松江路433號4樓 |
+            聯絡信箱：gocs@hotaigo.com.tw
+          </p>
+        </div>
+      </div>
+      <!-- 版權資訊 -->
+      <div class="footer-bottom">
+        <p>Copyright © 2025 Hotai Connected Co.,Ltd Powered by Hotai Motor Corporation</p>
+      </div>
+    </footer>
+
+  </div>
+
+
+
+  <!-- Vue 3 與 Element Plus -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/element-plus"></script>
+  <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  <script>
+    const { createApp } = Vue;
+    const { ElIcon } = ElementPlus;
+    const { Search, ShoppingCart, User, Location } = ElementPlusIconsVue;
+
+    createApp({
+      data() {
+        return {
+          searchQuery: "",
+          windowWidth: window.innerWidth,
+          categories: [
+            "美食甜點",
+            "景點門票",
+            "溫泉泡湯",
+            "博物/美術館",
+            "工作坊 & 課程",
+            "活動 & 展覽",
+            "主題樂園",
+            "spa & 按摩",
+            "住宿",
+            "觀光行程",
+            "戶外活動",
+          ],
+          themes: [
+            {
+              id: 1,
+              name: "美食甜點",
+              image: "public/mobile-categories/birthday-cake.png",
+            },
+            {
+              id: 2,
+              name: "景點門票",
+              image: "public/mobile-categories/ticket.png",
+            },
+            {
+              id: 3,
+              name: "溫泉泡湯",
+              image: "public/mobile-categories/stones.png",
+            },
+            {
+              id: 4,
+              name: "博物/美術館",
+              image: "public/mobile-categories/painting.png",
+            },
+            {
+              id: 5,
+              name: "工作坊＆課程",
+              image: "public/mobile-categories/school-bag.png",
+            },
+            {
+              id: 6,
+              name: "活動 & 展覽",
+              image: "public/mobile-categories/museum-map.png",
+            },
+            {
+              id: 7,
+              name: "主題樂園",
+              image: "public/mobile-categories/merry-go-round.png",
+            },
+            {
+              id: 8,
+              name: "spa & 按摩",
+              image: "public/mobile-categories/bath-towel.png",
+            },
+          ],
+          "japanProducts": [
+            {
+              "id": 1,
+              "name": "東京｜花之舞海鮮居酒屋｜江戶東京博物館前店",
+              "image": "public/products/japan/1.jpeg",
+              "price": 451,
+              "originalPrice": 1610,
+              "description": "每月一次的鮪魚解體秀，帶來極致新鮮的海味！本店嚴選來自產地直送的頂級海鮮，搭配職人巧手料理，呈現最道地的日式風味。快來享受Q彈新鮮的刺身與多樣化的居酒屋美食，搭配嚴選日本酒，體驗正宗東京居酒屋文化！",
+              "location": "東京",
+              "link": "#"
+            },
+            {
+              "id": 2,
+              "name": "東京｜新鮮漁獲直送居酒屋｜花之舞",
+              "image": "public/products/japan/2.jpeg",
+              "price": 451,
+              "originalPrice": 1610,
+              "description": "嚴選當日直送的新鮮海產，搭配精緻日式料理手法，每一口都鮮甜回味！本店以快速便捷的居酒屋菜單著稱，讓您在傳統和室包廂內，輕鬆品味各式道地美食與精選日本酒，感受最正宗的日式風情。",
+              "location": "東京",
+              "link": "#"
+            },
+            {
+              "id": 3,
+              "name": "東京｜職人手作海鮮饗宴｜花之舞居酒屋",
+              "image": "public/products/japan/3.jpeg",
+              "price": 451,
+              "originalPrice": 1610,
+              "description": "鮮美海味直送您的味蕾！本店每日嚴選新鮮漁獲，以最道地的日式手法精心烹調，讓您品嚐來自大海的純粹鮮甜。無論是Q彈刺身、豐富居酒屋小食，還是搭配日本酒的完美組合，都能帶來極致的味覺享受。",
+              "location": "東京",
+              "link": "#"
+            },
+            {
+              "id": 4,
+              "name": "東京｜道地日式海鮮料理｜花之舞本店",
+              "image": "public/products/japan/4.jpeg",
+              "price": 451,
+              "originalPrice": 1610,
+              "description": "在地人最愛的海鮮居酒屋，專為饕客準備的極致美味！我們堅持使用當日現撈漁獲，保證最新鮮的海味，並搭配多樣化的日式料理與居酒屋小吃，讓您在充滿日式氛圍的和室包廂內，享受一場難忘的美食饗宴。",
+              "location": "東京",
+              "link": "#"
+            },
+            {
+              "id": 5,
+              "name": "東京｜道地日式海鮮料理｜花之舞本店",
+              "image": "public/products/japan/4.jpeg",
+              "price": 451,
+              "originalPrice": 1610,
+              "description": "在地人最愛的海鮮居酒屋，專為饕客準備的極致美味！我們堅持使用當日現撈漁獲，保證最新鮮的海味，並搭配多樣化的日式料理與居酒屋小吃，讓您在充滿日式氛圍的和室包廂內，享受一場難忘的美食饗宴。",
+              "location": "東京",
+              "link": "#"
+            },
+            {
+              "id": 6,
+              "name": "東京｜道地日式海鮮料理｜花之舞本店",
+              "image": "public/products/japan/4.jpeg",
+              "price": 451,
+              "originalPrice": 1610,
+              "description": "在地人最愛的海鮮居酒屋，專為饕客準備的極致美味！我們堅持使用當日現撈漁獲，保證最新鮮的海味，並搭配多樣化的日式料理與居酒屋小吃，讓您在充滿日式氛圍的和室包廂內，享受一場難忘的美食饗宴。",
+              "location": "東京",
+              "link": "#"
+            }
+          ]
+        };
+      },
+      computed: {
+        bannerFolder() {
+          if (this.windowWidth >= 992) {
+            return "1123_438";
+          } else if (this.windowWidth >= 768) {
+            return "848_438";
+          } else {
+            return "454_145";
+          }
+        },
+        carouselImages() {
+          const banners = [
+            { name: "campaign", ext: "jpg" },
+            { name: "esim", ext: "png" },
+            { name: "insurance", ext: "jpg" },
+            { name: "japan", ext: "png" },
+          ];
+          return banners.map(
+            (item) =>
+              `public/banner/${this.bannerFolder}/${item.name}.${item.ext}`,
+          );
+        },
+        carouselHeight() {
+          if (this.windowWidth < 768) {
+            return "150px";
+          } else if (this.windowWidth < 992) {
+            return "350px";
+          } else {
+            return "450px";
+          }
+        },
+      },
+      mounted() {
+        window.addEventListener("resize", () => {
+          this.windowWidth = window.innerWidth;
+        });
+
+        this.$nextTick(() => {
+          new Swiper('.ad-swiper', {
+            loop: true,
+            centeredSlides: true,
+            slidesPerView: 1.2,
+            spaceBetween: 20,
+            autoplay: {
+              delay: 3000,
+            },
+            pagination: {
+              el: '.ad-swiper-pagination',
+              clickable: true,
+              dynamicBullets: true,
+            },
+            navigation: {
+              nextEl: '.ad-swiper-button-next',
+              prevEl: '.ad-swiper-button-prev',
+            },
+          });
+        });
+
+        const swiperIndexes = [0, 1, 2, 3, 4,5,6,7];
+        swiperIndexes.forEach((index) => {
+          this.$nextTick(() => {
+            new Swiper(`.product-swiper-${index}`, {
+              loop: false,
+              slidesPerView: 1,
+              centeredSlides: false,
+              spaceBetween: 10,
+              watchSlidesProgress: true,
+              watchSlidesVisibility: true,
+              breakpoints: {
+                500: {
+                  slidesPerView: 1.3,
+                },
+                768: {
+                  slidesPerView: 2,
+                },
+                992: {
+                },
+                1400: {
+                  slidesPerView: 4,
+                },
+              },
+              navigation: {
+                nextEl: `.swiper-button-next-${index}`,
+                prevEl: `.swiper-button-prev-${index}`,
+              },
+              pagination: {
+                el: `.swiper-pagination-${index}`,
+                clickable: true,
+                dynamicBullets: true,
+              },
+            });
+          });
+        });
+        
+        this.$nextTick(() => {
+          new Swiper('.category-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            navigation: {
+              nextEl: '.category-swiper-next',
+              prevEl: '.category-swiper-prev',
+            },
+            breakpoints: {
+              992: {
+                spaceBetween: 20,
+                slidesPerView: 5
+              },
+              768: {
+                slidesPerView: 5
+              },
+              0: {
+                slidesPerView: 'auto',
+                freeMode: true
+              }
+            }
+          });
+        });
+      },
+      components: {
+        ElIcon,
+        Search,
+        ShoppingCart,
+        User,
+        Location,
+      },
+    })
+      .use(ElementPlus)
+      .mount("#app");
+  </script>
+</body>
+
+</html>
