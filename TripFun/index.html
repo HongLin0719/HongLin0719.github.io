@@ -25,9 +25,24 @@
       font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
       color: #404040;
       overflow-x: hidden;
-      width: 100vw;
-      max-width: 100vw;
+      /* 隱藏水平滾動條 */
+      width: 100%;
+      max-width: 100%;
       border-top: 10px solid #00aedc;
+      margin: 0;
+      /* 確保沒有多餘的邊距 */
+      padding: 0;
+      /* 避免內部元素影響 */
+    }
+
+    html,
+    body {
+      overflow-x: hidden !important;
+      /* 強制隱藏水平滾動 */
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0;
+      padding: 0;
     }
 
     .top-bar {
@@ -431,11 +446,13 @@
       transition: all 1s;
     }
 
-    .product-container-card a, .product-container-card-like a{
+    .product-container-card a,
+    .product-container-card-like a {
       text-decoration: none;
     }
 
-    .product-container-card:hover, .product-container-card-like:hover{
+    .product-container-card:hover,
+    .product-container-card-like:hover {
       opacity: .8;
     }
 
@@ -1871,7 +1888,7 @@
           });
         });
 
-        const swiperIndexes = [0, 1, 2, 3, 4,5,6,7];
+        const swiperIndexes = [0, 1, 2, 3, 4, 5, 6, 7];
         swiperIndexes.forEach((index) => {
           this.$nextTick(() => {
             new Swiper(`.product-swiper-${index}`, {
@@ -1906,7 +1923,7 @@
             });
           });
         });
-        
+
         this.$nextTick(() => {
           new Swiper('.category-swiper', {
             slidesPerView: 1,
