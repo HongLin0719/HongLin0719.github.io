@@ -271,6 +271,8 @@
         width: 100%;
         margin-bottom: 20px;
       }
+
+      
     }
 
     .ad-swiper-button-prev,
@@ -594,6 +596,10 @@
       }
 
       .popular-travel {
+        display: none;
+      }
+
+      .product-swiper-8{
         display: none;
       }
     }
@@ -1634,6 +1640,7 @@
     <section class="container country-section hot-trip-section">
       <div class="subtitle justify-content-between d-flex align-items-center">
         <h2 class="h2-subtitle country-title">熱門遊程</h2>
+        
         <div>
           <a href="#" class="el-button see-more">餐廳美食</a>
         </div>
@@ -1647,6 +1654,7 @@
         <div>
           <a href="#" class="el-button see-more">熱門活動</a>
         </div>
+     
       </div>
 
       <section class="hot-trip">
@@ -1765,12 +1773,7 @@
         </div>
       </section>
 
-      <section class="container country-section">
-        <div class="subtitle justify-content-between d-flex align-items-center">
-          <img src="https://travel.hotaigo.com.tw/flag/japan.svg" alt="flag" width="30" height="30" />
-          <h2 class="h2-subtitle country-title">猜你喜歡</h2>
-        </div>
-
+      <!-- 992以下顯示 -->
         <div class="swiper  product-swiper product-swiper-8">
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
@@ -1811,7 +1814,7 @@
           <div class="product-swiper-button-next swiper-button-next swiper-button-next-8"></div>
           <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-8"></div>
         </div>
-      </section>
+     
 
 
 
