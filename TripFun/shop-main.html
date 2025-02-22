@@ -54,6 +54,7 @@
       width: 50%;
       height: 56px;
       padding: 0 20px;
+      border-radius: 5px;
     }
 
     .search-icon {
@@ -228,8 +229,16 @@
       flex-grow: 1;
     }
 
+    @media screen and (min-width: 768px) {
+      .activity-block {
+        display: none;
+      }
+    }
+
+
+
     /* Keep 4 columns on mobile */
-    @media screen and(max-width: 768px) {
+    @media screen and (max-width: 768px) {
       .activity-container {
         grid-template-columns: repeat(4, 1fr);
         gap: 2px;
@@ -272,7 +281,15 @@
         margin-bottom: 20px;
       }
 
-      
+      .ad-swiper-button-next,
+      .ad-swiper-button-prev {
+        display: none !important;
+      }
+      .activity-block {
+        display: flex;
+        gap: 12px;
+      }
+
     }
 
     .ad-swiper-button-prev,
@@ -349,13 +366,20 @@
         max-width: 600px;
         padding: 0 20px;
         margin: 0 auto;
-        min-height: 56px;
+        height: 56px;
+        font-size: 12px;
       }
 
       .mobile-search-bar .search-bar {
         display: block;
         width: 100%;
         height: 56px;
+      }
+
+      .mobile-search-bar .el-input {
+        height: 56px;
+        margin-bottom: 30px;
+
       }
 
       .pc-top-category-menu {
@@ -439,9 +463,8 @@
     }
 
     /* 當 .product-container-card 被 hover 時，讓圖片放大並變清晰 */
-    .product-container-card:hover .product-container-img img,
-    .product-container-card-like :hover.product-container-img img
-   {
+    .product-container-card:hover .product-container-cover-img,
+    .product-container-card-like :hover.product-container-cover-img {
       transform: scale(1.2);
       /* 放大 1.2 倍 */
       opacity: 1;
@@ -470,19 +493,9 @@
       height: 100%;
     }
 
-    .product-container-img {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      height: 50%;
-      min-height: 50%;
-      flex-shrink: 0;
-      border-radius: 15px;
-    }
 
-    .product-container-img img {
+
+    .product-container-cover-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -512,7 +525,6 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
-      width: 200px;
     }
 
     .product-container-price {
@@ -559,13 +571,21 @@
     }
 
     .product-container-tag {
-      background-color: #FFB300;
+      margin-right: 8px;
+      margin-top: 6px;
+      padding: 4px 8px;
+      flex-wrap: nowrap;
+      background-color: #FFB300 !important;
+      white-space: nowrap;
       color: #fff;
-      border-radius: 5px;
-
-      padding: 3px 8px;
-      /* 減小內邊距 */
-      float: left;
+      border-radius: 4px;
+      font-size: 12px;
+      line-height: 12px;
+      min-height: 12px;
+      font-weight: normal;
+      display: inline-flex;
+      align-items: center;
+      vertical-align: baseline;
     }
 
     /* For desktop and larger screens */
@@ -599,7 +619,7 @@
         display: none;
       }
 
-      .product-swiper-8{
+      .product-swiper-8 {
         display: none;
       }
     }
@@ -1145,6 +1165,10 @@
       .footer-right {
         margin-top: 20px;
       }
+
+      .subtitle h2~div {
+        display: none;
+      }
     }
 
     .hot-trip-section {
@@ -1189,8 +1213,8 @@
       height: calc((500px - 15px) / 2);
     }
 
-    .hot-trip__image-container{
-      overflow:hidden;
+    .hot-trip__image-container {
+      overflow: hidden;
       box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
       border-radius: 10px;
     }
@@ -1204,7 +1228,7 @@
       border-radius: 10px;
     }
 
-    .hot-trip__image:hover{
+    .hot-trip__image:hover {
       transform: scale(1.2);
       /* 放大 1.2 倍 */
       opacity: 1;
@@ -1323,6 +1347,60 @@
       min-width: 12px;
       min-height: 12px;
     }
+
+    .product-container-img {
+      position: relative;
+      /* 加入相對定位，讓內部絕對定位元素以此為參考 */
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      height: 50%;
+      min-height: 50%;
+      flex-shrink: 0;
+      border-radius: 15px;
+    }
+
+
+    /* 小標籤 */
+    .product-image-location-label {
+      position: absolute;
+      top: 10px;
+      /* 根據需求調整與容器上邊的距離 */
+      left: 10px;
+      /* 根據需求調整與容器左邊的距離 */
+      display: flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 28px;
+      height: 20px;
+      z-index: 10;
+      color: #616161 !important;
+      background-color: #ffffff !important;
+      line-height: 12px;
+      min-height: 12px;
+      font-weight: normal;
+      display: inline-flex;
+      align-items: center;
+      vertical-align: baseline;
+      padding: 2px 8px;
+      font-size: 12px;
+    }
+
+    /* 標籤內icon */
+    .location-lable-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+      object-fit: contain;
+    }
+
+    .product-container-tag-box {
+      min-height: 26px;
+      display: flex;
+      flex-wrap: no-wrap;
+    }
   </style>
 </head>
 
@@ -1334,7 +1412,7 @@
       <div class="container top-bar d-flex align-items-center justify-content-between">
         <!-- 左邊 LOGO -->
         <a href="#" aria-label="去趣chicTrip | 旅遊商城">
-          <img src="logo.jpg" alt="Logo" />
+          <img src="FunTrip_logo.png" alt="Logo" width="107px" height="50px" />
         </a>
         <!-- 搜尋欄 (桌面版) -->
         <el-input v-model="searchQuery" class="search-bar mx-auto" placeholder="輸入目的地、景點、體驗行程或活動名稱...">
@@ -1363,7 +1441,7 @@
       </div>
 
       <!-- 手機版搜尋欄 -->
-      <div class="mobile-search-bar">
+      <div class="container">
         <div class="mobile-search-bar w-100">
           <el-input v-model="searchQuery" placeholder="輸入目的地、景點、體驗行程或活動名稱...">
             <template #prefix>
@@ -1441,14 +1519,16 @@
               <div class="product-container-inner"></div>
               <div class="product-container-card">
                 <a :href="product.link" :aria-label="product.name">
-                  <div class="product-container-location d-flex">
-                    <span><el-icon>
-                        <location />
-                      </el-icon>東京</span>
-                  </div>
                   <section class="product-container-content">
                     <div class="product-container-img">
-                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                      <div class="product-image-location-label">
+                        <img src="public/icon/placeholder.png" alt="" class="location-lable-icon" />
+                        <div class="location-lable-text">
+                          曼谷
+                        </div>
+                      </div>
+                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy"
+                        class="product-container-cover-img">
                     </div>
                     <div class="product-container-info">
                       <div class="product-container-name">
@@ -1461,8 +1541,9 @@
                         <span>TWD: {{ product.originalPrice }}</span>
                         TWD: <strong>{{ product.price }} </strong>起
                       </div>
-                      <div class="product-container-tag">
-                        <div>免費取消</div>
+                      <div class="product-container-tag-box">
+                        <div class="product-container-tag">即買即用</div>
+                        <div class="product-container-tag">免費取消</div>
                       </div>
                     </div>
                   </section>
@@ -1482,7 +1563,7 @@
     <section class="container country-section">
       <div class="subtitle justify-content-between d-flex align-items-center">
         <img src="https://travel.hotaigo.com.tw/flag/japan.svg" alt="flag" width="30" height="30" />
-        <h2 class="h2-subtitle country-title">日本</h2>
+        <h2 class="h2-subtitle country-title">泰國</h2>
         <div>
           <a href="#" class="el-button see-more">查看更多</a>
         </div>
@@ -1495,14 +1576,16 @@
               <div class="product-container-inner"></div>
               <div class="product-container-card">
                 <a :href="product.link" :aria-label="product.name">
-                  <div class="product-container-location d-flex">
-                    <span><el-icon>
-                        <location />
-                      </el-icon>東京</span>
-                  </div>
                   <section class="product-container-content">
                     <div class="product-container-img">
-                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                      <div class="product-image-location-label">
+                        <img src="public/icon/placeholder.png" alt="" class="location-lable-icon" />
+                        <div class="location-lable-text">
+                          曼谷
+                        </div>
+                      </div>
+                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy"
+                        class="product-container-cover-img">
                     </div>
                     <div class="product-container-info">
                       <div class="product-container-name">
@@ -1515,8 +1598,9 @@
                         <span>TWD: {{ product.originalPrice }}</span>
                         TWD: <strong>{{ product.price }} </strong>起
                       </div>
-                      <div class="product-container-tag">
-                        <div>免費取消</div>
+                      <div class="product-container-tag-box">
+                        <div class="product-container-tag">即買即用</div>
+                        <div class="product-container-tag">免費取消</div>
                       </div>
                     </div>
                   </section>
@@ -1526,12 +1610,11 @@
           </div>
         </div>
         <!-- 分頁器和導航按鈕 -->
-        <div class="swiper-pagination swiper-pagination-1"></div>
+        <div class="swiper-pagination swiper-pagination-0"></div>
         <div class="product-swiper-button-next swiper-button-next swiper-button-next-1"></div>
         <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-1"></div>
       </div>
     </section>
-
     <!-- 飛機 -->
     <div class="aircraft-div">
       <div class="aircraft">
@@ -1542,7 +1625,7 @@
     <section class="container country-section">
       <div class="subtitle justify-content-between d-flex align-items-center">
         <img src="https://travel.hotaigo.com.tw/flag/japan.svg" alt="flag" width="30" height="30" />
-        <h2 class="h2-subtitle country-title">日本</h2>
+        <h2 class="h2-subtitle country-title">台灣旅遊</h2>
         <div>
           <a href="#" class="el-button see-more">查看更多</a>
         </div>
@@ -1555,14 +1638,16 @@
               <div class="product-container-inner-tw"></div>
               <div class="product-container-card">
                 <a :href="product.link" :aria-label="product.name">
-                  <div class="product-container-location d-flex">
-                    <span><el-icon>
-                        <location />
-                      </el-icon>東京</span>
-                  </div>
                   <section class="product-container-content">
                     <div class="product-container-img">
-                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                      <div class="product-image-location-label">
+                        <img src="public/icon/placeholder.png" alt="" class="location-lable-icon" />
+                        <div class="location-lable-text">
+                          曼谷
+                        </div>
+                      </div>
+                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy"
+                        class="product-container-cover-img">
                     </div>
                     <div class="product-container-info">
                       <div class="product-container-name">
@@ -1575,8 +1660,9 @@
                         <span>TWD: {{ product.originalPrice }}</span>
                         TWD: <strong>{{ product.price }} </strong>起
                       </div>
-                      <div class="product-container-tag">
-                        <div>免費取消</div>
+                      <div class="product-container-tag-box">
+                        <div class="product-container-tag">即買即用</div>
+                        <div class="product-container-tag">免費取消</div>
                       </div>
                     </div>
                   </section>
@@ -1586,7 +1672,7 @@
           </div>
         </div>
         <!-- 分頁器和導航按鈕 -->
-        <div class="swiper-pagination swiper-pagination-2"></div>
+        <div class="swiper-pagination swiper-pagination-0"></div>
         <div class="product-swiper-button-next swiper-button-next swiper-button-next-2"></div>
         <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-2"></div>
       </div>
@@ -1595,27 +1681,29 @@
     <section class="container country-section">
       <div class="subtitle justify-content-between d-flex align-items-center">
         <img src="https://travel.hotaigo.com.tw/flag/japan.svg" alt="flag" width="30" height="30" />
-        <h2 class="h2-subtitle country-title">日本</h2>
+        <h2 class="h2-subtitle country-title">台南特輯</h2>
         <div>
           <a href="#" class="el-button see-more">查看更多</a>
         </div>
       </div>
 
-      <div class="swiper  product-swiper product-swiper-3">
+      <div class="swiper product-swiper product-swiper-3">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
             <div class="product-container-tw">
               <div class="product-container-inner-tw"></div>
               <div class="product-container-card">
                 <a :href="product.link" :aria-label="product.name">
-                  <div class="product-container-location d-flex">
-                    <span><el-icon>
-                        <location />
-                      </el-icon>東京</span>
-                  </div>
                   <section class="product-container-content">
                     <div class="product-container-img">
-                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                      <div class="product-image-location-label">
+                        <img src="public/icon/placeholder.png" alt="" class="location-lable-icon" />
+                        <div class="location-lable-text">
+                          曼谷
+                        </div>
+                      </div>
+                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy"
+                        class="product-container-cover-img">
                     </div>
                     <div class="product-container-info">
                       <div class="product-container-name">
@@ -1628,8 +1716,9 @@
                         <span>TWD: {{ product.originalPrice }}</span>
                         TWD: <strong>{{ product.price }} </strong>起
                       </div>
-                      <div class="product-container-tag">
-                        <div>免費取消</div>
+                      <div class="product-container-tag-box">
+                        <div class="product-container-tag">即買即用</div>
+                        <div class="product-container-tag">免費取消</div>
                       </div>
                     </div>
                   </section>
@@ -1639,7 +1728,7 @@
           </div>
         </div>
         <!-- 分頁器和導航按鈕 -->
-        <div class="swiper-pagination swiper-pagination-3"></div>
+        <div class="swiper-pagination swiper-pagination-0"></div>
         <div class="product-swiper-button-next swiper-button-next swiper-button-next-3"></div>
         <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-3"></div>
       </div>
@@ -1655,7 +1744,6 @@
     <section class="container country-section hot-trip-section">
       <div class="subtitle justify-content-between d-flex align-items-center">
         <h2 class="h2-subtitle country-title">熱門遊程</h2>
-        
         <div>
           <a href="#" class="el-button see-more">餐廳美食</a>
         </div>
@@ -1669,7 +1757,22 @@
         <div>
           <a href="#" class="el-button see-more">熱門活動</a>
         </div>
-     
+      </div>
+      <!-- 768以下顯示 -->
+      <div class="activity-block">
+        <div>
+          <a href="#" class="el-button see-more">餐廳美食</a>
+        </div>
+        <div>
+          <a href="#" class="el-button see-more">景點門票</a>
+        </div>
+
+        <div>
+          <a href="#" class="el-button see-more">溫泉SPA</a>
+        </div>
+        <div>
+          <a href="#" class="el-button see-more">熱門活動</a>
+        </div>
       </div>
 
       <section class="hot-trip">
@@ -1789,47 +1892,50 @@
       </section>
 
       <!-- 992以下顯示 -->
-        <div class="swiper  product-swiper product-swiper-8">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
-              <div class="product-container-card-like">
-                <a :href="product.link" :aria-label="product.name">
-                  <div class="product-container-location d-flex">
-                    <span><el-icon>
-                        <location />
-                      </el-icon>東京</span>
+      <div class="swiper  product-swiper product-swiper-8">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
+            <div class="product-container-card-like">
+              <a :href="product.link" :aria-label="product.name">
+                <section class="product-container-content">
+                  <div class="product-container-img">
+                    <div class="product-image-location-label">
+                      <img src="public/icon/placeholder.png" alt="" class="location-lable-icon" />
+                      <div class="location-lable-text">
+                        曼谷
+                      </div>
+                    </div>
+                    <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy"
+                      class="product-container-cover-img">
                   </div>
-                  <section class="product-container-content">
-                    <div class="product-container-img">
-                      <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                  <div class="product-container-info">
+                    <div class="product-container-name">
+                      <h3>{{ product.name }}</h3>
                     </div>
-                    <div class="product-container-info">
-                      <div class="product-container-name">
-                        <h3>{{ product.name }}</h3>
-                      </div>
-                      <div class="product-container-description">
-                        <p>{{product.description}}</p>
-                      </div>
-                      <div class="product-container-price">
-                        <span>TWD: {{ product.originalPrice }}</span>
-                        TWD: <strong>{{ product.price }} </strong>起
-                      </div>
-                      <div class="product-container-tag">
-                        <div>免費取消</div>
-                      </div>
+                    <div class="product-container-description">
+                      <p>{{product.description}}</p>
                     </div>
-                  </section>
-                </a>
-              </div>
-
+                    <div class="product-container-price">
+                      <span>TWD: {{ product.originalPrice }}</span>
+                      TWD: <strong>{{ product.price }} </strong>起
+                    </div>
+                    <div class="product-container-tag-box">
+                      <div class="product-container-tag">即買即用</div>
+                      <div class="product-container-tag">免費取消</div>
+                    </div>
+                  </div>
+                </section>
+              </a>
             </div>
+
           </div>
-          <!-- 分頁器和導航按鈕 -->
-          <div class="swiper-pagination swiper-pagination-8"></div>
-          <div class="product-swiper-button-next swiper-button-next swiper-button-next-8"></div>
-          <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-8"></div>
         </div>
-     
+        <!-- 分頁器和導航按鈕 -->
+        <div class="swiper-pagination swiper-pagination-8"></div>
+        <div class="product-swiper-button-next swiper-button-next swiper-button-next-8"></div>
+        <div class="product-swiper-button-prev swiper-button-prev swiper-button-prev-8"></div>
+      </div>
+
 
 
 
@@ -1977,14 +2083,16 @@
           <div class="swiper-slide" v-for="product in japanProducts" :key="product.id">
             <div class="product-container-card-like">
               <a :href="product.link" :aria-label="product.name">
-                <div class="product-container-location d-flex">
-                  <span><el-icon>
-                      <location />
-                    </el-icon>東京</span>
-                </div>
                 <section class="product-container-content">
                   <div class="product-container-img">
-                    <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy">
+                    <div class="product-image-location-label">
+                      <img src="public/icon/placeholder.png" alt="" class="location-lable-icon" />
+                      <div class="location-lable-text">
+                        曼谷
+                      </div>
+                    </div>
+                    <img :src="product.image" :alt="product.name" width="100" height="100" loading="lazy"
+                      class="product-container-cover-img">
                   </div>
                   <div class="product-container-info">
                     <div class="product-container-name">
@@ -1997,8 +2105,9 @@
                       <span>TWD: {{ product.originalPrice }}</span>
                       TWD: <strong>{{ product.price }} </strong>起
                     </div>
-                    <div class="product-container-tag">
-                      <div>免費取消</div>
+                    <div class="product-container-tag-box">
+                      <div class="product-container-tag">即買即用</div>
+                      <div class="product-container-tag">免費取消</div>
                     </div>
                   </div>
                 </section>
@@ -2022,57 +2131,59 @@
 
 
     <footer class="footer">
-      <div class="footer-container">
-        <!-- 左側 50% 區塊，內部分為兩欄 -->
-        <div class="footer-left">
-          <!-- 第一欄：關於和泰相關 -->
-          <div class="footer-column">
-            <h4>關於和泰相關</h4>
-            <ul>
-              <li><a href="#">和泰Points介紹</a></li>
-              <li><a href="#">和泰集團會員</a></li>
-              <li><a href="#">和泰集團會員隱私權政策</a></li>
-              <li><a href="#">和泰集團常見問題</a></li>
-              <li><a href="#">和泰集團會員條款</a></li>
-            </ul>
+      <div class="container">
+        <div class="footer-container">
+          <!-- 左側 50% 區塊，內部分為兩欄 -->
+          <div class="footer-left">
+            <!-- 第一欄：關於和泰相關 -->
+            <div class="footer-column">
+              <h4>關於和泰相關</h4>
+              <ul>
+                <li><a href="#">和泰Points介紹</a></li>
+                <li><a href="#">和泰集團會員</a></li>
+                <li><a href="#">和泰集團會員隱私權政策</a></li>
+                <li><a href="#">和泰集團常見問題</a></li>
+                <li><a href="#">和泰集團會員條款</a></li>
+              </ul>
+            </div>
+            <!-- 第二欄：關於去趣 -->
+            <div class="footer-column">
+              <h4>關於去趣</h4>
+              <ul>
+                <li><a href="#">FAQ專區</a></li>
+                <li><a href="#">客服專區</a></li>
+                <li><a href="#">隱私權政策</a></li>
+                <li><a href="#">免責聲明</a></li>
+                <li><a href="#">防詐騙提醒</a></li>
+                <li><a href="#">和泰集團相關服務</a></li>
+              </ul>
+            </div>
           </div>
-          <!-- 第二欄：關於去趣 -->
-          <div class="footer-column">
-            <h4>關於去趣</h4>
-            <ul>
-              <li><a href="#">FAQ專區</a></li>
-              <li><a href="#">客服專區</a></li>
-              <li><a href="#">隱私權政策</a></li>
-              <li><a href="#">免責聲明</a></li>
-              <li><a href="#">防詐騙提醒</a></li>
-              <li><a href="#">和泰集團相關服務</a></li>
-            </ul>
+          <!-- 右側 50% 區塊：旅行社資訊 -->
+          <div class="footer-right">
+            <h4>和漾旅行社股份有限公司</h4>
+            <p>旅遊商品由 和漾旅行社股份有限公司 提供</p>
+            <p>
+              代表人：吳品璁 | 統一編號：90356017 | 旅行社註冊編號：850800 | 品保協會會員編號：北2598號
+            </p>
+            <p>請點擊 <a href="#">客服專區</a> 專人為您服務</p>
+            <p>其他商品由 和泰聯網股份有限公司 提供</p>
+            <p>旅遊專線：(02)2506-2121 分機1436 週一至週五 (09:00-17:30)</p>
+            <p>
+              旅遊聯絡信箱：
+              service@chictrip.com.tw |
+              聯絡人：蘇聖惠
+            </p>
+            <p>
+              統一編號：55384114 | 地址：104台北市中山區松江路433號4樓 |
+              聯絡信箱：gocs@hotaigo.com.tw
+            </p>
           </div>
         </div>
-        <!-- 右側 50% 區塊：旅行社資訊 -->
-        <div class="footer-right">
-          <h4>和漾旅行社股份有限公司</h4>
-          <p>旅遊商品由 和漾旅行社股份有限公司 提供</p>
-          <p>
-            代表人：吳品璁 | 統一編號：90356017 | 旅行社註冊編號：850800 | 品保協會會員編號：北2598號
-          </p>
-          <p>請點擊 <a href="#">客服專區</a> 專人為您服務</p>
-          <p>其他商品由 和泰聯網股份有限公司 提供</p>
-          <p>旅遊專線：(02)2506-2121 分機1436 週一至週五 (09:00-17:30)</p>
-          <p>
-            旅遊聯絡信箱：
-            service@chictrip.com.tw |
-            聯絡人：蘇聖惠
-          </p>
-          <p>
-            統一編號：55384114 | 地址：104台北市中山區松江路433號4樓 |
-            聯絡信箱：gocs@hotaigo.com.tw
-          </p>
+        <!-- 版權資訊 -->
+        <div class="footer-bottom">
+          <p>Copyright © 2025 Hotai Connected Co.,Ltd Powered by Hotai Motor Corporation</p>
         </div>
-      </div>
-      <!-- 版權資訊 -->
-      <div class="footer-bottom">
-        <p>Copyright © 2025 Hotai Connected Co.,Ltd Powered by Hotai Motor Corporation</p>
       </div>
     </footer>
 
@@ -2325,14 +2436,23 @@
               watchSlidesProgress: true,
               watchSlidesVisibility: true,
               breakpoints: {
+                375: {
+                  slidesPerView: 1.1,
+                },
                 500: {
                   slidesPerView: 1.3,
                 },
+                530: {
+                  slidesPerView: 1.5,
+                },
                 768: {
-                  slidesPerView: 2,
+                  slidesPerView: 2.3
                 },
                 992: {
-                  slidesPerView: 2.3,
+                  slidesPerView: 2.8,
+                },
+                1280: {
+                  slidesPerView: 3.4,
                 },
                 1400: {
                   slidesPerView: 4,
